@@ -1,0 +1,1608 @@
+2023-08-10 06:06:57: Message: 
+
+2023-08-10 06:08:54: Message: 
+
+2023-08-10 06:11:10: Message: 
+
+2023-08-10 06:12:16: Message: 
+
+2023-08-10 06:12:29: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00CAA813+48355]
+	(No symbol) [0x00C3C4B1]
+	(No symbol) [0x00B45358]
+	(No symbol) [0x00B709A5]
+	(No symbol) [0x00B70B3B]
+	(No symbol) [0x00B9E232]
+	(No symbol) [0x00B8A784]
+	(No symbol) [0x00B9C922]
+	(No symbol) [0x00B8A536]
+	(No symbol) [0x00B682DC]
+	(No symbol) [0x00B693DD]
+	GetHandleVerifier [0x00F0AABD+2539405]
+	GetHandleVerifier [0x00F4A78F+2800735]
+	GetHandleVerifier [0x00F4456C+2775612]
+	GetHandleVerifier [0x00D351E0+616112]
+	(No symbol) [0x00C45F8C]
+	(No symbol) [0x00C42328]
+	(No symbol) [0x00C4240B]
+	(No symbol) [0x00C34FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 06:12:46: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00CAA813+48355]
+	(No symbol) [0x00C3C4B1]
+	(No symbol) [0x00B45358]
+	(No symbol) [0x00B709A5]
+	(No symbol) [0x00B70B3B]
+	(No symbol) [0x00B9E232]
+	(No symbol) [0x00B8A784]
+	(No symbol) [0x00B9C922]
+	(No symbol) [0x00B8A536]
+	(No symbol) [0x00B682DC]
+	(No symbol) [0x00B693DD]
+	GetHandleVerifier [0x00F0AABD+2539405]
+	GetHandleVerifier [0x00F4A78F+2800735]
+	GetHandleVerifier [0x00F4456C+2775612]
+	GetHandleVerifier [0x00D351E0+616112]
+	(No symbol) [0x00C45F8C]
+	(No symbol) [0x00C42328]
+	(No symbol) [0x00C4240B]
+	(No symbol) [0x00C34FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 06:13:03: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00CAA813+48355]
+	(No symbol) [0x00C3C4B1]
+	(No symbol) [0x00B45358]
+	(No symbol) [0x00B709A5]
+	(No symbol) [0x00B70B3B]
+	(No symbol) [0x00B9E232]
+	(No symbol) [0x00B8A784]
+	(No symbol) [0x00B9C922]
+	(No symbol) [0x00B8A536]
+	(No symbol) [0x00B682DC]
+	(No symbol) [0x00B693DD]
+	GetHandleVerifier [0x00F0AABD+2539405]
+	GetHandleVerifier [0x00F4A78F+2800735]
+	GetHandleVerifier [0x00F4456C+2775612]
+	GetHandleVerifier [0x00D351E0+616112]
+	(No symbol) [0x00C45F8C]
+	(No symbol) [0x00C42328]
+	(No symbol) [0x00C4240B]
+	(No symbol) [0x00C34FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 06:53:33: Message: 
+
+2023-08-10 06:55:12: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="offer-card-buy-button"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00CAA813+48355]
+	(No symbol) [0x00C3C4B1]
+	(No symbol) [0x00B45358]
+	(No symbol) [0x00B709A5]
+	(No symbol) [0x00B70B3B]
+	(No symbol) [0x00B9E232]
+	(No symbol) [0x00B8A784]
+	(No symbol) [0x00B9C922]
+	(No symbol) [0x00B8A536]
+	(No symbol) [0x00B682DC]
+	(No symbol) [0x00B693DD]
+	GetHandleVerifier [0x00F0AABD+2539405]
+	GetHandleVerifier [0x00F4A78F+2800735]
+	GetHandleVerifier [0x00F4456C+2775612]
+	GetHandleVerifier [0x00D351E0+616112]
+	(No symbol) [0x00C45F8C]
+	(No symbol) [0x00C42328]
+	(No symbol) [0x00C4240B]
+	(No symbol) [0x00C34FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 06:57:40: Message: 
+
+2023-08-10 07:36:36: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:38:41: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:38:57: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:39:31: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:39:49: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:39:52: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:39:52: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:40:22: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:40:45: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:41:07: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:41:17: Message: Could not locate element with index 8
+
+2023-08-10 07:41:22: Message: Could not locate element with index 8
+
+2023-08-10 07:41:30: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:42:07: Message: element click intercepted: Element <button id="edp-quantity-filter-button" data-bdd="filterBarButton" class="filter-bar__button" aria-haspopup="dialog">...</button> is not clickable at point (439, 506). Other element would receive the click: <div class="sc-bvFjSx gesuza container--overlay" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.75);">...</div>
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x01135062]
+	(No symbol) [0x01133B98]
+	(No symbol) [0x0113239B]
+	(No symbol) [0x0113179E]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:42:07: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:42:21: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:42:42: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:43:03: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:43:17: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:43:47: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:44:01: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:44:13: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:45:36: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:46:26: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:46:31: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:46:47: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:46:57: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:47:42: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:48:35: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:48:48: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:49:02: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:49:39: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:49:47: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:49:58: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:49:58: Message: element click intercepted: Element <button id="edp-quantity-filter-button" data-bdd="filterBarButton" class="filter-bar__button" aria-haspopup="dialog">...</button> is not clickable at point (439, 506). Other element would receive the click: <div class="sc-bvFjSx gesuza container--overlay" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.75);">...</div>
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x01135062]
+	(No symbol) [0x01133B98]
+	(No symbol) [0x0113239B]
+	(No symbol) [0x0113179E]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:02: Message: Could not locate element with index 8
+
+2023-08-10 07:50:06: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:15: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:17: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:36: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:37: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:38: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:38: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:38: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:50:39: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x010ED293]
+	(No symbol) [0x0114E37B]
+	(No symbol) [0x0115C473]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:57:11: Message: element click intercepted: Element <button id="edp-quantity-filter-button" data-bdd="filterBarButton" class="filter-bar__button" aria-haspopup="dialog">...</button> is not clickable at point (439, 506). Other element would receive the click: <div class="sc-bvFjSx gesuza container--overlay" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.75);">...</div>
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x01135062]
+	(No symbol) [0x01133B98]
+	(No symbol) [0x0113239B]
+	(No symbol) [0x0113179E]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:58:11: Message: Could not locate element with index 8
+
+2023-08-10 07:58:18: Message: element click intercepted: Element <button id="edp-quantity-filter-button" data-bdd="filterBarButton" class="filter-bar__button" aria-haspopup="dialog">...</button> is not clickable at point (439, 506). Other element would receive the click: <div class="sc-bvFjSx gesuza container--overlay" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.75);">...</div>
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x01135062]
+	(No symbol) [0x01133B98]
+	(No symbol) [0x0113239B]
+	(No symbol) [0x0113179E]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:58:34: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:58:42: Message: element not interactable
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105220]
+	(No symbol) [0x01131846]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:58:58: Message: Could not locate element with index 8
+
+2023-08-10 07:59:09: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:59:10: Message: element not interactable
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105220]
+	(No symbol) [0x01131846]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:59:28: Message: Could not locate element with index 8
+
+2023-08-10 07:59:34: Message: element not interactable
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105220]
+	(No symbol) [0x01131846]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 07:59:45: Message: Could not locate element with index 8
+
+2023-08-10 08:00:04: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#edp-quantity-filter-button"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 08:00:08: Message: element not interactable
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105220]
+	(No symbol) [0x01131846]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 08:00:30: Message: element not interactable
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105220]
+	(No symbol) [0x01131846]
+	(No symbol) [0x01129F5C]
+	(No symbol) [0x0114A73C]
+	(No symbol) [0x01129A36]
+	(No symbol) [0x0114AA94]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 08:00:52: Message: Could not locate element with index 8
+
+2023-08-10 08:00:57: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//span[ contains(text(), 'Standard Ticket') and @id]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
+2023-08-10 08:01:06: Message: no such element: Unable to locate element: {"method":"css selector","selector":"button[data-bdd="unselectAllTicketTypesBtn"]"}
+  (Session info: chrome=115.0.5790.170)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0126A813+48355]
+	(No symbol) [0x011FC4B1]
+	(No symbol) [0x01105358]
+	(No symbol) [0x011309A5]
+	(No symbol) [0x01130B3B]
+	(No symbol) [0x0115E232]
+	(No symbol) [0x0114A784]
+	(No symbol) [0x0115C922]
+	(No symbol) [0x0114A536]
+	(No symbol) [0x011282DC]
+	(No symbol) [0x011293DD]
+	GetHandleVerifier [0x014CAABD+2539405]
+	GetHandleVerifier [0x0150A78F+2800735]
+	GetHandleVerifier [0x0150456C+2775612]
+	GetHandleVerifier [0x012F51E0+616112]
+	(No symbol) [0x01205F8C]
+	(No symbol) [0x01202328]
+	(No symbol) [0x0120240B]
+	(No symbol) [0x011F4FF7]
+	BaseThreadInitThunk [0x774805C9+25]
+	RtlGetAppContainerNamedObjectPath [0x775B77AD+237]
+	RtlGetAppContainerNamedObjectPath [0x775B777D+189]
+
