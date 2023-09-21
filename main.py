@@ -340,6 +340,8 @@ def process_type_1(link, category_amount_dict, datas):
                     data, fs = sf.read('noti.wav', dtype='float32')  
                     sd.play(data, fs)
                     status = sd.wait()
+                    full_data = {"type": 1, 'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    post_request(full_data)
                     input('Continue?')
         limit = False
 
@@ -378,7 +380,7 @@ def process_type_3(link, category_amount_dict, datas):
                     data, fs = sf.read('noti.wav', dtype='float32')  
                     sd.play(data, fs)
                     status = sd.wait()
-                    full_data = {'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    full_data = {'type': 3,'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
                     post_request(full_data)
                     input('Continue?\n')
                     break
