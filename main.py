@@ -129,8 +129,8 @@ def selenium_connect():
     # print("User:", user)
     # print("Password:", password)
     # proxy = (host, int(port), user, password)
-    proxy_extension = ProxyExtension(*PROXY)
-    options.add_argument(f"--load-extension={proxy_extension.directory}")
+    # proxy_extension = ProxyExtension(*PROXY)
+    # options.add_argument(f"--load-extension={proxy_extension.directory}")
 
     prefs = {"credentials_enable_service": False,
         "profile.password_manager_enabled": False}
@@ -141,7 +141,7 @@ def selenium_connect():
     driver = webdriver.Chrome(
         options=options,
         enable_cdp_events=True,
-        
+        driver_executable_path='./chromedriver.exe'
     )
 
     screen_width, screen_height = driver.execute_script(
@@ -294,16 +294,16 @@ def process_type_1(link, category_amount_dict, datas):
         continue
     except: pass
     try:
-      driver.find_element(By.CSS_SELECTOR, 'svg[class="BaseSvg-sc-yh8lnd-0 TicketIcon___StyledBaseSvg-sc-qlvy2z-0 lirSVu sc-aitciz-2 fJonkR"]').click()
+      driver.find_elements(By.CSS_SELECTOR, 'button[class="sc-aitciz-1 hWHZkc"]')[1].click()
     except: pass
     try:
-      driver.find_element(By.CSS_SELECTOR, 'svg[class="BaseSvg-sc-yh8lnd-0 MagnifyingGlassIcon___StyledBaseSvg-sc-1pooy9n-0 lirSVu"]').click()
+      driver.find_element(By.CSS_SELECTOR, 'svg[class="BaseSvg-sc-yh8lnd-0 MagnifyingGlassIcon___StyledBaseSvg-sc-1pooy9n-0 ckLyyv"]').click()
     except: pass
     ticket_data = {}
-    tickets = driver.find_elements(By.CSS_SELECTOR, 'ul[class="sc-krebt0-0 icyuFr"] > li ')
+    tickets = driver.find_elements(By.CSS_SELECTOR, 'ul[class="sc-krebt0-0 dQKSqi"] > li')
     
     for ticket in tickets:
-        category = ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-3 iuhQgJ"]').text.split('\n')[0]
+        category = ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-3 izkONI"]').text.split('\n')[0]
         # price = extract_price(ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-5 chohwl"]').text)
         ticket_data[category] = {"ticket": ticket}
     limit = True
@@ -361,7 +361,7 @@ def process_type_3(link, category_amount_dict, datas):
         try:
             driver.find_element(By.CSS_SELECTOR, '#edp-quantity-filter-button').click()
             time.sleep(3)
-            driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="unselectAllTicketTypesBtn"]').click()
+            # driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="unselectAllTicketTypesBtn"]').click()
             random_key = random.choice(list(category_amount_dict.keys())).strip()
             driver.find_element(By.XPATH, f"//span[ contains(text(), '{random_key}') and @id]").click()
             select_element = driver.find_element(By.CSS_SELECTOR, '#filter-bar-quantity')
