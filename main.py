@@ -340,10 +340,60 @@ def process_type_1(link, category_amount_dict, datas):
                     data, fs = sf.read('noti.wav', dtype='float32')  
                     sd.play(data, fs)
                     status = sd.wait()
-                    full_data = {"type": 1, 'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    if datas: full_data = {"type": 1, 'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    else: full_data = {"type": 1, 'url': driver.current_url, 'name': 'no name', 'None': 'None', 'city': 'None'}
                     post_request(full_data)
                     input('Continue?')
         limit = False
+
+
+def process_type_2(link, category_amount_dict, datas):
+    driver = selenium_connect()
+    while True:
+        try:
+            driver.get(link)
+            if wait_for_something(driver, 'button[data-bdd="accept-modal-accept-button"]'):
+                driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="accept-modal-accept-button"]').click()
+            driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
+            time.sleep(15)
+            continue
+        except: pass
+        try:
+            driver.find_element(By.CSS_SELECTOR, 'div[class="ToggleSwitch__VisibleToggle-sc-tcnwub-2 hNnBYt"]').click()
+        except: pass
+        try:
+            random_key = random.choice(list(category_amount_dict.keys())).strip()
+            print(random_key)
+            driver.find_element(By.CSS_SELECTOR, 'button[class="sc-g9wzf-2 japIkg"]').click()
+            driver.find_element(By.XPATH, f'//span[ contains(text(), "{random_key}")]').click()
+            driver.find_element(By.XPATH, '//span[ contains(text(), "All Ticket Types")]').click()
+            time.sleep(2)
+            plus = driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"]')
+            
+            print(category_amount_dict)
+            if category_amount_dict[random_key]:
+                amount = int(driver.find_element(By.CSS_SELECTOR, 'span[data-testid="tselectionSpinbuttonValue"]').text)
+                for i in range (int(category_amount_dict[random_key]) - amount):
+                    try: 
+                        if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
+                        plus.click()
+                    except: pass
+            else:
+                while True:
+                    try:
+                        if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
+                        plus.click()
+                    except: pass
+            if look_for_tickets(driver) and not wait_for_button(driver): 
+                if 'checkout' in driver.current_url:
+                    data, fs = sf.read('noti.wav', dtype='float32')  
+                    sd.play(data, fs)
+                    status = sd.wait()
+                    input('Continue?')
+        except Exception as e:
+            print(e)
+            write_error_to_file(e)
+
 
 # //span[ contains(text(), 'Standard Admission') and @id]
 def process_type_3(link, category_amount_dict, datas):
@@ -380,7 +430,8 @@ def process_type_3(link, category_amount_dict, datas):
                     data, fs = sf.read('noti.wav', dtype='float32')  
                     sd.play(data, fs)
                     status = sd.wait()
-                    full_data = {'type': 3,'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    if datas: full_data = {"type": 3, 'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'city': datas[2]}
+                    else: full_data = {"type": 3, 'url': driver.current_url, 'name': 'no name', 'None': 'None', 'city': 'None'}
                     post_request(full_data)
                     input('Continue?\n')
                     break
@@ -399,9 +450,13 @@ if __name__ == "__main__":
     types = int(row[1])
     categories = row[2].split('\n')
     amounts = row[3].split('\n')
-    name = row[5]
-    date = row[6]
-    city = row[7]
+    name, date, city = None, None, None
+    try: name = row[5]
+    except: pass
+    try: date = row[6]
+    except: pass
+    try: city = row[7]
+    except: pass
     data = [name, date, city]
 
     category_amount_dict = {}
