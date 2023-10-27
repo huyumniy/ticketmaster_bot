@@ -1,6 +1,7 @@
 import requests
 import time
 import re
+import eel
 import sys, os
 import json
 import pandas as pd
@@ -94,7 +95,7 @@ class ProxyExtension:
         with open(manifest_file, mode="w") as f:
             f.write(self.manifest_json)
 
-        background_js = self.background_js % (host, port, user, password)
+        background_js = self.background_js % (host, int(port), user, password)
         background_file = os.path.join(self._dir, "background.js")
         with open(background_file, mode="w") as f:
             f.write(background_js)
@@ -107,7 +108,7 @@ class ProxyExtension:
         shutil.rmtree(self._dir)
 
 
-def selenium_connect():
+def selenium_connect(proxy):
     options = webdriver.ChromeOptions()
     options.add_argument("--start-maximized")
     #options.add_argument("--incognito")
@@ -129,8 +130,9 @@ def selenium_connect():
     # print("User:", user)
     # print("Password:", password)
     # proxy = (host, int(port), user, password)
-    # proxy_extension = ProxyExtension(*PROXY)
-    # options.add_argument(f"--load-extension={proxy_extension.directory}")
+    proxy = proxy.split(':')
+    proxy_extension = ProxyExtension(*proxy)
+    options.add_argument(f"--load-extension={proxy_extension.directory}")
 
     prefs = {"credentials_enable_service": False,
         "profile.password_manager_enabled": False}
@@ -282,11 +284,33 @@ def post_request(data):
         print("POST request failed.")
 
 
-def process_type_1(link, category_amount_dict, datas):
-  driver = selenium_connect()
-  while True:
+def check_for_element(driver, selector, click=False):
     try:
-        driver.get(link)
+        element = driver.find_element(By.CSS_SELECTOR, selector)
+        if click: element.click()
+        return element
+    except: return False
+
+
+def wait_for_queue(driver):
+    while True:
+        try:
+            check_for_element(driver, "//*[contains(text(), 'Get a new place in the queue')]", click=True)
+            
+            return True
+        except: pass
+
+
+def process_type_1(link, category_amount_dict, datas, proxy):
+  driver = selenium_connect(proxy)
+  while True:
+    driver.get(link)
+
+    try:
+        driver.find_element(By.CSS_SELECTOR, '#challenge-container')
+        wait_for_queue(driver)
+    except: pass
+    try:
         wait_for_clickable(driver, '#onetrust-reject-all-handler')
         driver.find_element(By.CSS_SELECTOR, '#onetrust-reject-all-handler').click()
         driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
@@ -346,9 +370,9 @@ def process_type_1(link, category_amount_dict, datas):
                     input('Continue?')
         limit = False
 
-
-def process_type_2(link, category_amount_dict, datas):
-    driver = selenium_connect()
+# temporary not working!
+def process_type_2(link, category_amount_dict, datas, proxy):
+    driver = selenium_connect(proxy)
     while True:
         try:
             driver.get(link)
@@ -396,8 +420,8 @@ def process_type_2(link, category_amount_dict, datas):
 
 
 # //span[ contains(text(), 'Standard Admission') and @id]
-def process_type_3(link, category_amount_dict, datas):
-    driver = selenium_connect()
+def process_type_3(link, category_amount_dict, datas, proxy):
+    driver = selenium_connect(proxy)
     while True:
         try:
             driver.get(link)
@@ -440,38 +464,43 @@ def process_type_3(link, category_amount_dict, datas):
         except Exception as e:
             write_error_to_file(e)
         
+@eel.expose
+def main(proxy):
+    data = get_data_from_google_sheets()
+    if not data: exit()
+    threads = []
+    for row in data:
+        link = row[4]
+        types = int(row[1])
+        categories = row[2].split('\n')
+        amounts = row[3].split('\n')
+        name, date, city = None, None, None
+        try: name = row[5]
+        except: pass
+        try: date = row[6]
+        except: pass
+        try: city = row[7]
+        except: pass
+        data = [name, date, city]
+
+        category_amount_dict = {}
+        for category, amount in zip(categories, amounts):
+            category_amount_dict[category.strip()] = amount.strip()
+        process_link = None
+        if types == 1: process_link = process_type_1
+        elif types == 3: process_link = process_type_3
+        thread = threading.Thread(target=process_link, args=(link, category_amount_dict, data, proxy))
+        thread.start()
+        threads.append(thread)
+
+        delay = random.uniform(5, 10)
+        time.sleep(delay)
+  
+    for thread in threads:
+        thread.join()
+  
+
 
 if __name__ == "__main__":
-  data = get_data_from_google_sheets()
-  if not data: exit()
-  threads = []
-  for row in data:
-    link = row[4]
-    types = int(row[1])
-    categories = row[2].split('\n')
-    amounts = row[3].split('\n')
-    name, date, city = None, None, None
-    try: name = row[5]
-    except: pass
-    try: date = row[6]
-    except: pass
-    try: city = row[7]
-    except: pass
-    data = [name, date, city]
-
-    category_amount_dict = {}
-    for category, amount in zip(categories, amounts):
-        category_amount_dict[category.strip()] = amount.strip()
-    process_link = None
-    if types == 1: process_link = process_type_1
-    elif types == 3: process_link = process_type_3
-    thread = threading.Thread(target=process_link, args=(link, category_amount_dict, data))
-    thread.start()
-    threads.append(thread)
-
-    delay = random.uniform(5, 10)
-    time.sleep(delay)
-  
-  for thread in threads:
-    thread.join()
-  
+  eel.init('web')
+  eel.start('main.html', size=(600, 800))
