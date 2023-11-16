@@ -4,7 +4,6 @@ import re
 import sys, os
 import json
 import pandas as pd
-from colorama import init, Fore
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as webdriver
 from selenium.webdriver.support.ui import Select
@@ -30,9 +29,9 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 SPREADSHEET_ID = '15aFBq6GSuaF8L6dFsA4Aw141dQy2s6N_MKZHgvpdSjo'
-init(autoreset=True)  # Initialize colorama for automatic color reset
 
-PROXY = ('proxy.packetstream.io', 31112, 'pergfan', '6ofKZOXwL7qSTGNZ')
+
+PROXY = ('proxy.packetstream.io', 31112, 'pergfan', '6ofKZOXwL7qSTGNZ_country-France')
 
 R_TABLE = {}
 
@@ -107,7 +106,7 @@ class ProxyExtension:
         shutil.rmtree(self._dir)
 
 
-def selenium_connect():
+def selenium_connect(proxy):
     options = webdriver.ChromeOptions()
     options.add_argument("--start-maximized")
     #options.add_argument("--incognito")
@@ -117,20 +116,11 @@ def selenium_connect():
     options.add_argument("--disable-site-isolation-trials")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--lang=EN')
-    #pergfan:6ofKZOXwL7qSTGNZ@proxy.packetstream.io:31112
-    # with open('proxies.txt', "r") as file:
-    #     lines = file.readlines()
-
-    # random_line = choice(lines)
-    # random_line = random_line.strip()
-    # host, port, user, password = random_line.split(":")
-    # print("Host:", host)
-    # print("Port:", port)
-    # print("User:", user)
-    # print("Password:", password)
-    # proxy = (host, int(port), user, password)
-    proxy_extension = ProxyExtension(*PROXY)
-    options.add_argument(f"--load-extension={proxy_extension.directory}")
+    if proxy:
+        proxy = proxy.split(':')
+        proxy[1] = int(proxy[1])
+        proxy_extension = ProxyExtension(*proxy)
+        options.add_argument(f"--load-extension={proxy_extension.directory}")
 
     prefs = {"credentials_enable_service": False,
         "profile.password_manager_enabled": False}
@@ -141,7 +131,6 @@ def selenium_connect():
     driver = webdriver.Chrome(
         options=options,
         enable_cdp_events=True,
-        
     )
 
     screen_width, screen_height = driver.execute_script(
@@ -153,10 +142,6 @@ def selenium_connect():
     driver.set_window_size(desired_width, screen_height)
 
     return driver
-
-
-def print_colored(text, color, rest):
-    print(f"{color}[{time.strftime('%H:%M:%S')}]{color}[{text}] {Fore.YELLOW}{rest}")
 
 
 def get_data_from_google_sheets():
@@ -180,7 +165,7 @@ def get_data_from_google_sheets():
         service = build("sheets", "v4", credentials=creds)
 
         # Define the range to fetch (assuming the data is in the first worksheet and starts from cell A2)
-        range_name = "main!A2:H"
+        range_name = "main!A2:J"
 
         # Fetch the data using batchGet
         request = service.spreadsheets().values().batchGet(spreadsheetId=SPREADSHEET_ID, ranges=[range_name])
@@ -195,7 +180,7 @@ def get_data_from_google_sheets():
         print(f"An HTTP error occurred: {error}")
         return None
     except Exception as e:
-        print_colored('ERROR', Fore.RED, 'Гугл токен застарiв, звернiться до Влада, щоб вiн його оновив!')
+        print(f"An error occurred: {e}")
         return None
 
 
@@ -282,15 +267,31 @@ def post_request(data):
         print("POST request failed.")
 
 
-def process_type_1(link, category_amount_dict, datas):
-  driver = selenium_connect()
+def change_ip(url):
+    try:
+        response = requests.get(url)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # You can print the response content or return it as needed
+            # For example, printing the response content:
+            print(response.text)
+        else:
+            print(f"Request failed with status code {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+
+
+def process_type_1(link, category_amount_dict, datas, proxy, proxy_url):
+  driver = selenium_connect(proxy)
   while True:
     try:
         driver.get(link)
         wait_for_clickable(driver, '#onetrust-reject-all-handler')
         driver.find_element(By.CSS_SELECTOR, '#onetrust-reject-all-handler').click()
         driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
-        time.sleep(15)
+        if proxy_url: change_ip(proxy_url)
+        time.sleep(45)
         continue
     except: pass
     try:
@@ -343,16 +344,66 @@ def process_type_1(link, category_amount_dict, datas):
                     input('Continue?')
         limit = False
 
-# //span[ contains(text(), 'Standard Admission') and @id]
-def process_type_3(link, category_amount_dict, datas):
-    driver = selenium_connect()
+
+def process_type_2(link, category_amount_dict, datas, proxy, proxy_url):
+    driver = selenium_connect(proxy)
     while True:
         try:
             driver.get(link)
             if wait_for_something(driver, 'button[data-bdd="accept-modal-accept-button"]'):
                 driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="accept-modal-accept-button"]').click()
             driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
-            time.sleep(15)
+            if proxy_url: change_ip(proxy_url)
+            time.sleep(45)
+            continue
+        except: pass
+        try:
+            driver.find_element(By.CSS_SELECTOR, 'div[class="ToggleSwitch__VisibleToggle-sc-tcnwub-2 hNnBYt"]').click()
+        except: pass
+        try:
+            random_key = random.choice(list(category_amount_dict.keys())).strip()
+            print(random_key)
+            driver.find_element(By.CSS_SELECTOR, 'button[class="sc-g9wzf-2 japIkg"]').click()
+            driver.find_element(By.XPATH, f'//span[ contains(text(), "{random_key}")]').click()
+            driver.find_element(By.XPATH, '//span[ contains(text(), "All Ticket Types")]').click()
+            time.sleep(2)
+            plus = driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"]')
+            
+            print(category_amount_dict)
+            if category_amount_dict[random_key]:
+                amount = int(driver.find_element(By.CSS_SELECTOR, 'span[data-testid="tselectionSpinbuttonValue"]').text)
+                for i in range (int(category_amount_dict[random_key]) - amount):
+                    try: 
+                        if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
+                        plus.click()
+                    except: pass
+            else:
+                while True:
+                    try:
+                        if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
+                        plus.click()
+                    except: pass
+            if look_for_tickets(driver) and not wait_for_button(driver): 
+                if 'checkout' in driver.current_url:
+                    data, fs = sf.read('noti.wav', dtype='float32')  
+                    sd.play(data, fs)
+                    status = sd.wait()
+                    input('Continue?')
+        except Exception as e:
+            print(e)
+            write_error_to_file(e)
+
+
+def process_type_3(link, category_amount_dict, datas, proxy, proxy_url):
+    driver = selenium_connect(proxy)
+    while True:
+        try:
+            driver.get(link)
+            if wait_for_something(driver, 'button[data-bdd="accept-modal-accept-button"]'):
+                driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="accept-modal-accept-button"]').click()
+            driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
+            if proxy_url: change_ip(proxy_url)
+            time.sleep(45)
             continue
         except: pass
         try:
@@ -390,25 +441,27 @@ def process_type_3(link, category_amount_dict, datas):
 
 if __name__ == "__main__":
   data = get_data_from_google_sheets()
-  if not data: exit()
   threads = []
   for row in data:
     link = row[4]
     types = int(row[1])
     categories = row[2].split('\n')
     amounts = row[3].split('\n')
-    name = row[5]
-    date = row[6]
-    city = row[7]
-    data = [name, date, city]
+    data = [row[5], row[6], row[7]]
+    proxy, proxy_url = None, None
+    try: 
+        proxy = row[8] 
+        proxy_url = row[9]
+    except: pass
 
     category_amount_dict = {}
     for category, amount in zip(categories, amounts):
         category_amount_dict[category.strip()] = amount.strip()
     process_link = None
     if types == 1: process_link = process_type_1
+    elif types == 2: process_link = process_type_2
     elif types == 3: process_link = process_type_3
-    thread = threading.Thread(target=process_link, args=(link, category_amount_dict, data))
+    thread = threading.Thread(target=process_link, args=(link, category_amount_dict, data, proxy, proxy_url))
     thread.start()
     threads.append(thread)
 
@@ -418,3 +471,5 @@ if __name__ == "__main__":
   for thread in threads:
     thread.join()
   
+
+
