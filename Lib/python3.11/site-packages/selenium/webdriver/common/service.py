@@ -19,11 +19,10 @@ import logging
 import os
 import subprocess
 import typing
-import warnings
 from abc import ABC
 from abc import abstractmethod
+from io import IOBase
 from platform import system
-from subprocess import DEVNULL
 from subprocess import PIPE
 from time import sleep
 from urllib import request
@@ -43,34 +42,28 @@ class Service(ABC):
 
     :param executable: install path of the executable.
     :param port: Port for the service to run on, defaults to 0 where the operating system will decide.
-    :param log_file: (Optional) file descriptor (pos int) or file object with a valid file descriptor.
-        subprocess.PIPE & subprocess.DEVNULL are also valid values.
+    :param log_output: (Optional) int representation of STDOUT/DEVNULL, any IO instance or String path to file.
     :param env: (Optional) Mapping of environment variables for the new process, defaults to `os.environ`.
     """
 
     def __init__(
         self,
-        executable: str = None,
+        executable_path: str = None,
         port: int = 0,
-        log_file: SubprocessStdAlias = None,
         log_output: SubprocessStdAlias = None,
         env: typing.Optional[typing.Mapping[typing.Any, typing.Any]] = None,
         **kwargs,
     ) -> None:
         if isinstance(log_output, str):
             self.log_output = open(log_output, "a+", encoding="utf-8")
-        elif log_output is subprocess.STDOUT:
+        elif log_output == subprocess.STDOUT:
             self.log_output = None
-        elif log_output is None or log_output is subprocess.DEVNULL:
-            self.log_output = open(os.devnull, "wb")
+        elif log_output is None or log_output == subprocess.DEVNULL:
+            self.log_output = subprocess.DEVNULL
         else:
             self.log_output = log_output
 
-        if log_file is not None:
-            warnings.warn("log_file has been deprecated, please use log_output", DeprecationWarning, stacklevel=2)
-            self.log_output = open(log_file, "a+", encoding="utf-8")
-
-        self._path = executable
+        self._path = executable_path
         self.port = port or utils.free_port()
         # Default value for every python subprocess: subprocess.Popen(..., creationflags=0)
         self.popen_kw = kwargs.pop("popen_kw", {})
@@ -109,10 +102,10 @@ class Service(ABC):
             self.assert_process_still_running()
             if self.is_connectable():
                 break
-
+            # sleep increasing: 0.01, 0.06, 0.11, 0.16, 0.21, 0.26, 0.31, 0.36, 0.41, 0.46, 0.5
+            sleep(min(0.01 + 0.05 * count, 0.5))
             count += 1
-            sleep(0.5)
-            if count == 60:
+            if count == 70:
                 raise WebDriverException(f"Can not connect to the Service {self._path}")
 
     def assert_process_still_running(self) -> None:
@@ -141,13 +134,12 @@ class Service(ABC):
 
     def stop(self) -> None:
         """Stops the service."""
-        if self.log_output != PIPE and not (self.log_output == DEVNULL):
-            try:
-                # Todo: Be explicit in what we are catching here.
-                if hasattr(self.log_output, "close"):
-                    self.log_file.close()  # type: ignore
-            except Exception:
-                pass
+
+        if self.log_output not in {PIPE, subprocess.DEVNULL}:
+            if isinstance(self.log_output, IOBase):
+                self.log_output.close()
+            elif isinstance(self.log_output, int):
+                os.close(self.log_output)
 
         if self.process is not None:
             try:
@@ -165,7 +157,11 @@ class Service(ABC):
         silently ignores errors here.
         """
         try:
-            stdin, stdout, stderr = self.process.stdin, self.process.stdout, self.process.stderr
+            stdin, stdout, stderr = (
+                self.process.stdin,
+                self.process.stdout,
+                self.process.stderr,
+            )
             for stream in stdin, stdout, stderr:
                 try:
                     stream.close()  # type: ignore
@@ -203,6 +199,12 @@ class Service(ABC):
         cmd.extend(self.command_line_args())
         close_file_descriptors = self.popen_kw.pop("close_fds", system() != "Windows")
         try:
+            start_info = None
+            if system() == "Windows":
+                start_info = subprocess.STARTUPINFO()
+                start_info.dwFlags = subprocess.CREATE_NEW_CONSOLE | subprocess.STARTF_USESHOWWINDOW
+                start_info.wShowWindow = subprocess.SW_HIDE
+
             self.process = subprocess.Popen(
                 cmd,
                 env=self.env,
@@ -211,9 +213,16 @@ class Service(ABC):
                 stderr=self.log_output,
                 stdin=PIPE,
                 creationflags=self.creation_flags,
+                startupinfo=start_info,
                 **self.popen_kw,
             )
-            logger.debug(f"Started executable: `{self._path}` in a child process with pid: {self.process.pid}")
+            logger.debug(
+                "Started executable: `%s` in a child process with pid: %s using %s to output %s",
+                self._path,
+                self.process.pid,
+                self.creation_flags,
+                self.log_output,
+            )
         except TypeError:
             raise
         except OSError as err:

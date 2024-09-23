@@ -4,112 +4,425 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticketmaster bot</title>
-    <link rel="icon" type="image/x-icon" href="ico.ico"  />
+    <link rel="icon" type="image/x-icon" href="ico.ico" />
     <script src="eel.js"></script>
-    <style>
-        body {
-            background: #0575E6;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-            color:aliceblue;
-            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        .main {
-            height: 90vh;
-            margin: 0px 8rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            
-        }
-        .proxy {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-        }
-        input {
-            display: flex;
-            border: none;
-            background: rgba(255, 255, 255, .5);
-            border-radius: 10px;
-            padding: 10px;
-            color: #0F2027;
-            outline: none;
-            width: 250px;
-            font-size: 16px;
-            color: aliceblue;
-        }
-        #run {
-            margin-top: 100px;
-            height: 50px;
-            width: 190px;
-            font-size: 24px;
-            border-radius: 15px;
-            border: solid;
-        }
-
-        .active {
-            color:chartreuse;
-            background: #0F2027;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            cursor:pointer;
-            border: solid;
-        }
-
-
-        .disabled {
-            cursor: default;
-            border: none;
-            background: #0F2027;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="main">
         <h1>Ticketmaster bot</h1>
-        <div class="proxy">
-            <h3>Proxy</h3>
-            <input id="proxy" type="text" placeholder="domain:port:login:pass">
+        <div class="choose_model">
+            <label for="model">Використовувати adspower?</label>
+            <input type="checkbox" id="model" name="model">
         </div>
-        <button id="run" class="active">Start</button>
+        <input id="link" type="text" class="normal-size-input" name="link" placeholder="link">
+        <input type="text" id="proxy" class="normal-size-input" name="proxy" placeholder="ip:port:login:password">
+        <div class="categories">
+            <div>
+                <button class="add-category">+</button>
+                <input type="text" class="normal-size-input category-input" name="category" placeholder="Category or sector range (0-9999)">
+            </div>
+        </div>
+        <h3>Ціна</h3>
+        <div class="dash-range">
+            <input id="priceMin" class="little-size-input" name="price-min" type="text" placeholder="0">
+            -
+            <input id="priceMax" class="little-size-input" name="price-max" type="text" placeholder="999">
+        </div>
+        <h3>Кількість</h3>
+        <div class="dash-range">
+            <input id="amountMin" class="little-size-input" name="amount-min" type="text" placeholder="1">
+            -
+            <input id="amountMax" class="little-size-input" name="amount-max" type="text" placeholder="4">
+        </div>
+        <div class="checkbox">
+            <h3 for="nearEachOther">Ловити сусідні квитки:</h3>
+            <input type="checkbox" id="nearEachOther" name="nearEachOther" value="N">
+        </div>
+        <hr class="hr">
+        <div class="interval">
+            <h3>Інтервал оновлення</h3>
+            <input id="refreshInterval" type="text" class="little-size-input" name="refresh-interval" placeholder="30">
+        </div>
+        <div class="buttons">
+            <div class="start">
+              <button id="run" class="active">Start</button>
+          </div>
+          <div class="restart">
+            <button id="restart" class="disabled">Restart</button>
+        </div>
+        </div>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
-        eel.expose(close_window)
+        // Exposing eel function
+        eel.expose(close_window);
         function close_window() {
-            window.close()
+            window.close();
         }
 
-         async function start(button) {
+        // Function to start the bot
+        async function start(button) {
             if (button.getAttribute("class") == "active") {
-                button.innerHTML = 'Processing';
-                button.style.color = "gold";
-                const proxy = document.querySelector('#proxy').value
+                button.innerHTML = '';
+                button.style.color = "#0F2027";
+                let link = document.querySelector('#link').value;
+                let max_price = document.querySelector('#priceMax').value;
+                let min_price = document.querySelector('#priceMin').value;
+                let price = [(min_price != '' ? String(min_price) : '0')  + '-' + (max_price != '' ? String(max_price) : '999')];
 
-                await eel.main(proxy)();
+                let amountMin = document.querySelector('#amountMin').value;
+                let amountMax = document.querySelector('#amountMax').value;
+
+                let refreshInterval_raw = document.querySelector('#refreshInterval').value;
+                let refreshInterval = refreshInterval_raw != '' ? String(refreshInterval_raw) : '30'
+
+                // Use String() to convert amountMin and amountMax to strings
+                let amount = [(amountMin != '' ? String(amountMin) : '1') + '-' + (amountMax != '' ? String(amountMax) : '4')];
+                let isNear = document.querySelector('#nearEachOther').checked
+                // Get the category values
+                let categories = getCategoryValues();
+                console.log('Link:', link);
+                console.log('Categories:', categories);
+                console.log('Price:', price);
+                console.log('Amount:', amount);
+                console.log('Is near:', isNear);
+                const categoryAmountDict = {};
+
+                if (amount.length === 1 && categories.length > 1) {
+                    categories.forEach(category => {
+                        categoryAmountDict[category.trim()] = amount[0].trim();
+                    });
+                } else {
+                    categories.forEach((category, index) => {
+                        categoryAmountDict[category.trim()] = amount[index].trim();
+                    });
+                }
+                console.log(categoryAmountDict)
+                console.log('Refresh interval:', refreshInterval);
+                if (document.querySelector('#model').checked) {
+                    let adspowerNumber = document.querySelector('#proxy').value
+                    let adspowerAPI = document.querySelector('#adspowerApi').value
+                    console.log('Adspower number:', adspowerNumber)
+                    console.log('Adspower API:', adspowerAPI)
+                    document.querySelector('#restart').setAttribute("class", "active-restart");
+                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber, adspowerAPI, null)();
+                } else {
+                    let proxy = document.querySelector('#proxy').value
+                    console.log('Proxy:', proxy)
+                    document.querySelector('#restart').setAttribute("class", "active-restart");
+                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, null, null, proxy)();
+                }
             }
         }
 
+        // Function to get the selected seat values
+        function getSelectedSeats() {
+            const selectedSeats = [];
+            document.querySelectorAll('#seats input[type="checkbox"]:checked').forEach((checkbox) => {
+                selectedSeats.push(parseInt(checkbox.value));
+            });
+            return selectedSeats;
+        }
 
+        // Function to dynamically create new category inputs
+        function createNewCategoryInput() {
+            const categoryContainer = document.querySelector('.categories');
+            const newCategoryDiv = document.createElement('div');
+
+            newCategoryDiv.innerHTML = `
+                <button class="add-category">+</button>
+                <input type="text" class="normal-size-input category-input" name="category" placeholder="Category or sector range (0-9999)">
+            `;
+
+            // Attach event listener to the newly added button
+            newCategoryDiv.querySelector('.add-category').addEventListener('click', function () {
+                createNewCategoryInput();
+            });
+
+            categoryContainer.appendChild(newCategoryDiv);
+        }
+
+        // Function to get all category input values
+        function getCategoryValues() {
+            const categories = [];
+            document.querySelectorAll('.category-input').forEach(input => {
+                input.value != '' ? categories.push(input.value) : null;
+            });
+            return categories;
+        }
+
+        // Main function to handle start button click
         function main() {
             const button = document.querySelector('#run');
             if (button.innerHTML == "Start") start(button);
         }
 
-
+        // Event listener for starting the bot
         jQuery('#run').on('click', function() {
             main();
         });
+
+        // Event listener for the model checkbox
+        jQuery('#model').on('change', function() {
+            const proxyInput = document.querySelector('#proxy');
+            if (this.checked) {
+                // Change proxy input to Adspower number input
+                proxyInput.setAttribute('type', 'number');
+                proxyInput.setAttribute('placeholder', 'Adspower number');
+                proxyInput.value = ''; // Clear the current value
+
+                // Create Adspower API input field
+                const adspowerApiInput = document.createElement('input');
+                adspowerApiInput.setAttribute('type', 'text');
+                adspowerApiInput.setAttribute('id', 'adspowerApi');
+                adspowerApiInput.setAttribute('class', 'normal-size-input');
+                adspowerApiInput.setAttribute('placeholder', 'Adspower API');
+                adspowerApiInput.setAttribute('name', 'adspower-api');
+                adspowerApiInput.style.marginBottom = '12px'; // Add some spacing
+
+                // Insert the Adspower API input field right after the proxy input
+                proxyInput.insertAdjacentElement('afterend', adspowerApiInput);
+            } else {
+                // Revert back to proxy input field
+                proxyInput.setAttribute('type', 'text');
+                proxyInput.setAttribute('placeholder', 'ip:port:login:password');
+                proxyInput.value = ''; // Clear the current value
+
+                // Remove the Adspower API input field if it exists
+                const adspowerApiInput = document.querySelector('#adspowerApi');
+                if (adspowerApiInput) {
+                    adspowerApiInput.remove();
+                }
+            }
+        });
+
+        // Initial event listener for the first category add button
+        document.querySelector('.add-category').addEventListener('click', function () {
+            createNewCategoryInput();
+        });
+
+        // Restart button logic
+        // Restart button logic
+        async function restart(button) {
+            if (button.getAttribute("class") == "active-restart") {
+                // Disable the button to prevent multiple clicks
+                button.setAttribute("class", "disabled");
+
+                // Collect the necessary inputs
+                let link = document.querySelector('#link').value;
+                let max_price = document.querySelector('#priceMax').value;
+                let min_price = document.querySelector('#priceMin').value;
+                let price = [(min_price != '' ? String(min_price) : '0') + '-' + (max_price != '' ? String(max_price) : '999')];
+
+                let amountMin = document.querySelector('#amountMin').value;
+                let amountMax = document.querySelector('#amountMax').value;
+                let amount = [(amountMin != '' ? String(amountMin) : '1') + '-' + (amountMax != '' ? String(amountMax) : '4')];
+
+                let refreshInterval_raw = document.querySelector('#refreshInterval').value;
+                let refreshInterval = refreshInterval_raw != '' ? String(refreshInterval_raw) : '30';
+
+                let isNear = document.querySelector('#nearEachOther').checked;
+
+                // Get the category values
+                let categories = getCategoryValues();
+
+                const categoryAmountDict = {};
+                if (amount.length === 1 && categories.length > 1) {
+                    categories.forEach(category => {
+                        categoryAmountDict[category.trim()] = amount[0].trim();
+                    });
+                } else {
+                    categories.forEach((category, index) => {
+                        categoryAmountDict[category.trim()] = amount[index].trim();
+                    });
+                }
+
+                // Determine if Adspower or Proxy is used
+                if (document.querySelector('#model').checked) {
+                    let adspowerNumber = document.querySelector('#proxy').value;
+                    let adspowerAPI = document.querySelector('#adspowerApi').value;
+                    
+                    console.log('Restarting with Adspower settings...');
+                    console.log('Adspower number:', adspowerNumber);
+                    console.log('Adspower API:', adspowerAPI);
+                    
+                    await eel.restart_main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber, adspowerAPI, null)();
+                } else {
+                    let proxy = document.querySelector('#proxy').value;
+                    
+                    console.log('Restarting with Proxy settings...');
+                    console.log('Proxy:', proxy);
+                    
+                    await eel.restart_main(link, categoryAmountDict, price, isNear, refreshInterval, null, null, proxy)();
+                }
+
+                // Re-enable the button after a delay
+                setTimeout(() => {
+                    button.setAttribute("class", "active-restart");
+                }, 5000);
+            }
+        }
+
+
+        jQuery('#restart').on('click', function() {
+            const button = document.querySelector('#restart');
+            restart(button);
+        });
+
+
+        function validateProxy() {
+            const proxyInput = document.querySelector('#proxy');
+            
+            // Check if Adspower model is selected
+            if (document.querySelector('#model').checked) {
+                const adspowerApiInput = document.querySelector('#adspowerApi'); // Ensure this is only selected when the checkbox is checked
+                const adspowerNumber = proxyInput.value; // Adspower number input
+                const adspowerNumberRegex = /^[0-9]+$/; // Only digits allowed
+
+                // Validate Adspower number (only digits)
+                if (!adspowerNumberRegex.test(adspowerNumber)) {
+                    proxyInput.style.borderColor = 'red';
+                    return false; // Return false if validation fails
+                } else {
+                    proxyInput.style.borderColor = ''; // Reset border color if valid
+                }
+
+                // Validate Adspower API (ensure it's not empty)
+                if (adspowerApiInput && adspowerApiInput.value.trim() === '') {
+                    adspowerApiInput.style.borderColor = 'red'; // Highlight the field if it's empty
+                    return false; // Return false if validation fails
+                } else if (adspowerApiInput) {
+                    adspowerApiInput.style.borderColor = ''; // Reset border color if valid
+                }
+            } else {
+                // Proxy validation when Adspower model is not checked
+                const proxyValue = proxyInput.value;
+                const proxyRegex = /^([^:]+):(\d+):([^:]+):([^:]+)$/; // Proxy format: ip:port:login:password
+
+                if (!proxyRegex.test(proxyValue)) {
+                    proxyInput.style.borderColor = 'red';
+                    return false; // Return false if validation fails
+                } else {
+                    proxyInput.style.borderColor = ''; // Reset border color if valid
+                }
+            }
+
+            return true; // Return true if all validations pass
+        }
+
+    // Function to validate categories
+    function validateCategory() {
+        let isValid = true;
+        document.querySelectorAll('.category-input').forEach(input => {
+            const categoryValue = input.value.trim();
+
+            // Regular expression for numeric range (e.g., "123-456")
+            const numericRangeRegex = /^\d+-\d+$/;
+            
+            // Regular expression for allowed text or mixed values (e.g., "category 3", "standing only", "category 3 + 5")
+            const textOrMixedRegex = /^[a-zA-Z\s\d\+\-]+$/;
+
+            // Validate input: Either match numeric range or match text/mixed input
+            if (categoryValue && !(numericRangeRegex.test(categoryValue) || textOrMixedRegex.test(categoryValue))) {
+                input.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                input.style.borderColor = ''; // reset to default
+            }
+        });
+        return isValid;
+    }
+
+
+    // Function to validate price and amount inputs
+    function validateRange(minId, maxId) {
+        const minInput = document.querySelector(`#${minId}`);
+        const maxInput = document.querySelector(`#${maxId}`);
+        const minValue = parseFloat(minInput.value) || 0;
+        const maxValue = parseFloat(maxInput.value) || 0;
+
+        if (minValue < 0 || maxValue < 0 || minValue > maxValue) {
+            minInput.style.borderColor = 'red';
+            maxInput.style.borderColor = 'red';
+            return false;
+        } else {
+            minInput.style.borderColor = ''; // reset to default
+            maxInput.style.borderColor = ''; // reset to default
+            return true;
+        }
+    }
+
+    // Function to validate refresh interval and click delay
+    function validatePositiveNumber(inputId) {
+        const input = document.querySelector(`#${inputId}`);
+        const value = parseFloat(input.value);
+
+        if (value < 0) {
+            input.style.borderColor = 'red';
+            return false;
+        } else {
+            input.style.borderColor = ''; // reset to default
+            return true;
+        }
+    }
+
+    // Main validation function before allowing to start
+    function validateForm() {
+        const isProxyValid = validateProxy();
+        const areCategoriesValid = validateCategory();
+        const isPriceValid = validateRange('priceMin', 'priceMax');
+        const isAmountValid = validateRange('amountMin', 'amountMax');
+        const isIntervalValid = validatePositiveNumber('refreshInterval');
+        console.log(isProxyValid, areCategoriesValid, isPriceValid, isAmountValid, isIntervalValid)
+        // Enable the Start button only if all validations pass
+        const startButton = document.querySelector('#run');
+        if (isProxyValid && areCategoriesValid && isPriceValid && isAmountValid && isIntervalValid) {
+            startButton.disabled = false;
+        } else {
+            startButton.disabled = true;
+        }
+    }
+
+    function handleCheckboxClick() {
+    const modelCheckbox = document.querySelector('#model');
+
+    // Check if model checkbox is checked
+    modelCheckbox.addEventListener('change', function () {
+        if (modelCheckbox.checked) {
+            // Adspower model is selected, now look for adspowerApi input once it's available
+            setTimeout(() => {
+                const adspowerApiInput = document.querySelector('#adspowerApi');
+                if (adspowerApiInput) {
+                    // Add event listener for adspowerApi only when it's available
+                    adspowerApiInput.addEventListener('input', validateProxy);
+                }
+            }, 0); // Using setTimeout to ensure the input is available in DOM after checkbox is checked
+        } else {
+            // Reset the validation when the checkbox is unchecked
+            const adspowerApiInput = document.querySelector('#adspowerApi');
+            if (adspowerApiInput) {
+                adspowerApiInput.removeEventListener('input', validateProxy);
+            }
+        }
+    });
+}
+
+    // Attach event listeners to input fields for real-time validation
+    document.querySelector('#proxy').addEventListener('input', validateProxy);
+    // document.querySelectorAll('.category-input').forEach(input => input.addEventListener('input', validateForm));
+    document.querySelector('#priceMin').addEventListener('input', validateForm);
+    document.querySelector('#priceMax').addEventListener('input', validateForm);
+    document.querySelector('#amountMin').addEventListener('input', validateForm);
+    document.querySelector('#amountMax').addEventListener('input', validateForm);
+    document.querySelector('#refreshInterval').addEventListener('input', validateForm);
+    handleCheckboxClick();
+
+    // Initial validation on page load to disable the Start button
+    document.addEventListener('DOMContentLoaded', () => {
+        validateForm(); // Disable button initially if form is invalid
+    });
     </script>
 </body>
 </html>

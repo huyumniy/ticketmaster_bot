@@ -14,7 +14,6 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-
 """The Desired Capabilities implementation."""
 
 
@@ -94,12 +93,8 @@ class DesiredCapabilities:
 
     WEBKITGTK = {
         "browserName": "MiniBrowser",
-        "version": "",
-        "platform": "ANY",
     }
 
     WPEWEBKIT = {
         "browserName": "MiniBrowser",
-        "version": "",
-        "platform": "ANY",
     }

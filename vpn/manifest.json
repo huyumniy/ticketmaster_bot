@@ -1,0 +1,110 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "4.8.0",
+  "homepage_url": "https://www.urban-vpn.com/",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": "icons/icon-grey.png",
+    "default_title": "Urban VPN",
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "ad-blocker/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "webRequestAuthProvider",
+    "offscreen",
+    "alarms",
+    "management",
+    "proxy",
+    "scripting",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/content/anti-male-ware-notification/index.html",
+        "/content/safe-price-check-notification/index.html",
+        "/content/vpn-notification/index.html",
+        "/content/consent-reminder-notification/index.html",
+        "/content/terminated-connection-notification/index.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "/content/location/location.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    },
+    {
+      "resources": [
+        "/libs/extend-native-history-api.js",
+        "/libs/requests.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "executers/fr-co.js",
+        "executers/vi-ig-tr.js",
+        "executers/vi-oo-tr.js",
+        "executers/vi-pn-tr.js",
+        "executers/vi-rd-tr.js",
+        "executers/vi-tr.js",
+        "executers/vi-tt-tr.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://*.bugsnag.com/*"
+  ],
+  "background": {
+    "service_worker": "service-worker/index.js"
+  },
+  "minimum_chrome_version": "109.0"
+}
