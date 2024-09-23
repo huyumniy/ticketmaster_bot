@@ -82,6 +82,12 @@ body {
     flex-direction: column;
     align-items: center;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.main::-webkit-scrollbar {
+    display: none;
 }
 
 .main h1 {

@@ -506,14 +506,14 @@ def queue_bypass(driver, email, password):
             break
     return True
 
-
+@eel.expose
 def process_type_1(driver):
   global data
   link = data['link']
   category_amount_dict = data['category_amount_dict']
   proxy = data['proxy']
   price = data['price']
-  reload_time = data['refresh_interval']
+  reload_time = int(data['refresh_interval'])
   ranged_price = parse_range(price[0])
   print('CATEGORIES', category_amount_dict)
   # driver = ''
@@ -550,23 +550,23 @@ def process_type_1(driver):
         #     if is_queue: input('continue?')
         # except: pass
         try:
-            check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-            driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
-            if reload_time: time.sleep(reload_time)
-            else: time.sleep(45)
-            driver.refresh()
-        except: pass
-        try:
             driver.find_element(By.CSS_SELECTOR, 'div[id="t1"]')
+            print('block')
             if proxy == "vpn":
                 if reload_time: time.sleep(reload_time)
                 driver.delete_all_cookies()
                 set_random_16_9_resolution(driver)
                 reconnect_vpn(driver, link)
-            # if proxy_url: change_ip(proxy_url)
-            # if reload_time: time.sleep(reload_time)
-            # else: time.sleep(60)
+            if reload_time: time.sleep(reload_time)
+            else: time.sleep(60)
             continue
+        except: pass
+        try:
+            check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+            driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
+            if reload_time: time.sleep(reload_time)
+            else: time.sleep(45)
+            driver.refresh()
         except: pass
         check_for_element(driver, '#onetrust-reject-all-handler', click=True)
         tickets_tab = check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
@@ -594,7 +594,6 @@ def process_type_1(driver):
                     random_key = choice(list(ticket_data.keys()))
                     random_key_value = ticket_data[random_key]
                     random_price = random_key_value['price']
-                    print("DATA",random_price, ranged_price)
                     if len(category_amount_dict) == 0: break
                     if len(category_amount_dict) == 1 and list(category_amount_dict.keys())[0] == '': break
                     if random_price <= int(ranged_price[0]) or random_price >= int(ranged_price[1]): continue
@@ -707,7 +706,7 @@ def process_type_1(driver):
             limit = False
     except Exception as e:
         print("EXCEPTION", e)
-        time.sleep(50)
+        time.sleep(5)
         
 
 
@@ -718,7 +717,6 @@ def is_within_range(target, lower_bound, upper_bound):
     return False
 
 
-# temporary not working!
 def process_type_2(link, category_amount_dict, datas, proxy, proxy_url, reload_time):
     driver = selenium_connect(proxy)
     while True:
@@ -1290,7 +1288,7 @@ data = {
     'category_amount_dict': {},
     'price': ['0-999'],
     'is_near': False,
-    'refresh_interval': '30',
+    'refresh_interval': 30,
     'adspower_number': '',
     'adspower_api': '',
     'proxy': ''
@@ -1364,6 +1362,8 @@ def run():
           check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
           if wait_for_element(driver, '//h2[contains(text(), "Search For Tickets")]', xpath=True, timeout=5):
               process_type_1(driver)
+          elif wait_for_element(driver, 'div[id="quickpicks"]', timeout=5):
+            process_type_2(driver)
 
 
 if __name__ == "__main__":
