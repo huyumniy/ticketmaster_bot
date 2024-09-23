@@ -1,3 +1,7 @@
 Lib
 bin
 include
+Scripts
+/Lib
+/bin
+/Scripts
