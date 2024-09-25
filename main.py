@@ -540,7 +540,6 @@ def process_type_1(driver):
   #     elif proxy:
   #       print('PROXY')
   #       pass
-  driver.get(link)
   while True:
     print('in while True')
     try:
@@ -694,7 +693,9 @@ def process_type_1(driver):
                         total_cart = check_for_element(driver, '#cart >div > div> div> div').text.split('\n')[2]
                       except: pass
                       if not num_of_tickets:
-                        num_of_tickets = category_amount_dict[random.choice(list(category_amount_dict.keys()))]
+                        try:
+                          num_of_tickets = category_amount_dict[random.choice(list(category_amount_dict.keys()))]
+                        except: pass
                       print(num_of_tickets, total_cart)
                       
                       full_data = {"type": 1, 'url': driver.current_url, 'name': None, 'date': None, 'city': None,
@@ -706,7 +707,7 @@ def process_type_1(driver):
             limit = False
     except Exception as e:
         print("EXCEPTION", e)
-        time.sleep(5)
+        time.sleep(reload_time)
         
 
 
@@ -916,8 +917,7 @@ def process_type_4(driver):
     near = data['is_near']
 
     print(category_amount_dict)
-    
-    driver.get(link)
+  
     while True:
         try:
             is_queue = wait_for_element(driver, 'aside[aria-label="Seat Map"]')
@@ -987,7 +987,7 @@ def process_type_4(driver):
                     if 'categories' in filters:
                         for x in category_amount_dict.keys():
                             if isinstance(x, str) and 'standing' not in x.lower() and not parse_range(x):
-                                check_for_element(driver, f"//*[@id=\"list-view\"] .//*[contains(text(),'{x}')]", xpath=True, click=True)
+                                check_for_element(driver, f"//*[@id=\"quickpicks\"]/div[1]/div[2]/div//span[contains(text(),'{x}')]", xpath=True, click=True)
                 print('after break')
                 our_amount = 2
                 if not empty_amount:
