@@ -1403,10 +1403,10 @@ def run():
           check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
           if wait_for_element(driver, '//h2[contains(text(), "Search For Tickets")]', xpath=True, timeout=5):
               process_type_1(driver)
-          elif wait_for_element(driver, 'div[id="quickpicks"]l', timeout=5):
-            process_type_2(driver)
-          elif wait_for_element(driver, '#map-container', timeout=5):
-            process_type_4(driver)
+          # elif wait_for_element(driver, 'div[id="quickpicks"]l', timeout=5):
+          #   process_type_2(driver)
+          # elif wait_for_element(driver, '#map-container', timeout=5):
+          #   process_type_4(driver)
 
 
 if __name__ == "__main__":
