@@ -96,8 +96,8 @@ def slack_post():
 
 @app.route('/adspower', methods=['POST'])
 def send_ads():
-    data, adspower, email, password = request.json['data'], request.json['adspower'], request.json['email'], request.json['password']
-    data_to_send = f"{data}\n*adspower:* {adspower}\n*email:* {email}\n*password:* {password}"
+    data, adspower_api, adspower_number = request.json['data'], request.json['adspower_api'], request.json['adspower_number']
+    data_to_send = f"{data}\n*adspower API:* {adspower_api}\n*adspower id:* {adspower_number}"
     send_message_to_group_channel(data_to_send)
 
 

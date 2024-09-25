@@ -908,23 +908,15 @@ def process_type_3(link, category_amount_dict, datas, proxy, proxy_url, reload_t
             pass
 
 
-def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_time, time_to_wait, price, levels, email, password, adspower=None, near=None):
-    driver = ''
+def process_type_4(driver):
+    global data
+    link = data['link']
+    category_amount_dict = data['category_amount_dict']
+    reload_time = int(data['refresh_interval'])
+    near = data['is_near']
+
     print(category_amount_dict)
-    if not adspower:
-      temp_proxy = 'vpn'
-      if proxy != 'vpn':
-          temp_proxy = proxy if not isinstance(proxy, list) else choice(proxy)
-      driver = create_new_connection(temp_proxy, link)
-      time.sleep(2)
-      if proxy == 'vpn':
-          tabs = driver.window_handles
-          driver.switch_to.window(tabs[1])
-          driver.close()
-          driver.switch_to.window(tabs[0])
-      if proxy == 'vpn': reconnect_vpn(driver, link)
-    elif adspower:
-      driver = selenium_connect('', adspower)
+    
     driver.get(link)
     while True:
         try:
@@ -946,7 +938,6 @@ def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_t
             try:
                 check_for_element(driver, '#onetrust-reject-all-handler', click=True)
                 driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
-                if proxy_url: change_ip(proxy_url)
                 if reload_time: time.sleep(reload_time)
                 else: time.sleep(45)
                 driver.refresh()
@@ -996,7 +987,7 @@ def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_t
                     if 'categories' in filters:
                         for x in category_amount_dict.keys():
                             if isinstance(x, str) and 'standing' not in x.lower() and not parse_range(x):
-                                check_for_element(driver, f".//*[contains(text(),'{x}')]", xpath=True, click=True)
+                                check_for_element(driver, f"//*[@id=\"list-view\"] .//*[contains(text(),'{x}')]", xpath=True, click=True)
                 print('after break')
                 our_amount = 2
                 if not empty_amount:
@@ -1056,31 +1047,32 @@ def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_t
                         try: section_number = int(section_number_raw)
                         except: pass
                         if isinstance(section_number, int):
-                            # Check if the section number falls within any of the parsed ranges
-                            for parsed_range in parse_ranges(category_amount_dict.keys()):
-                                print(f"Checking section number: {section_number}, Parsed range: {parsed_range}")
-                                if parsed_range[0] < section_number < parsed_range[1]:
-                                    random_section.click()
-                                    print('CLICKED: Valid section found')
-                                    clicked = True
-                                    break  # Break out of the for loop after successful click
-                            if clicked:
-                                break  # Break out of the while loop after successful click
+                          # Check if the section number falls within any of the parsed ranges
+                          for parsed_range in parse_ranges(category_amount_dict.keys()):
+                            print(f"Checking section number: {section_number}, Parsed range: {parsed_range}")
+                            if parsed_range[0] < section_number < parsed_range[1]:
+                              random_section.click()
+                              print('CLICKED: Valid section found')
+                              clicked = True
+                              break  # Break out of the for loop after successful click
+                          if clicked:
+                            break  # Break out of the while loop after successful click
                         else:
                             
-                            # If the section doesn't contain numbers, click on it
-                            random_section.click()
-                            print("CLICKED: Section without numbers")
-                            clicked = True
-                            break  # Exit the while loop after successful click
+                          # If the section doesn't contain numbers, click on it
+                          try:  random_section.click()
+                          except: coordinate_click(driver, random_section)
+                          print("CLICKED: Section without numbers")
+                          clicked = True
+                          break  # Exit the while loop after successful click
 
                     except Exception as e:
-                        print(f"Error occurred: {e}")
-                        time.sleep(5)  # Wait before retrying
-                        continue  # Retry with the next section
+                      print(f"Error occurred: {e}")
+                      time.sleep(5)  # Wait before retrying
+                      continue  # Retry with the next section
                 # If no sections were found and clicked
                 if not clicked:
-                    print("No valid section found.")
+                  print("No valid section found.")
                 
                 # After clicking, proceed with your wait
                 
@@ -1118,7 +1110,7 @@ def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_t
                 # FOR STANDING
                 if map_container:
                     print('MAP CONTAINER')
-                    tickets = check_for_elements(driver, 'div[data-testid="ticketTypeInfo"]')
+                    tickets = check_for_elements(driver, '#map-container div[data-testid="ticketTypeInfo"]')
                     for _ in range(2): 
                         minus_button = check_for_element(tickets[0], 'button[data-testid="tselectionSpinbuttonMinus"]')
                         if minus_button: minus_button.click()
@@ -1139,29 +1131,28 @@ def process_type_4(link, category_amount_dict, datas, proxy, proxy_url, reload_t
                 # IF SUCCESS
                 success = wait_for_element(driver, 'form[action="/checkout/order"]', timeout=60, click=True)
                 if success:
-                    data, fs = sf.read('noti.wav', dtype='float32')
-                    sd.play(data, fs)
-                    status = sd.wait()
+                  data_to_play, fs = sf.read('noti.wav', dtype='float32')
+                  sd.play(data_to_play, fs)
+                  status = sd.wait()
 
-                    total = check_for_element(driver, 'span[data-bdd="order-summary-ticket-quantity"]')
-                    data_to_send = f'*Усього квитків:* {total.text}\n'
-                    unit_1 = check_for_element(driver, 'span[data-bdd="order-summary-ticket-facevalue"]')
-                    
-                    event_name = check_for_element(driver, 'h2[class="event-header__title event-header__title--timer truncate-text"]')
-                    event_date = check_for_element(driver, 'span[class="event-header__date--timer truncate-text event-header__date"]')
-                    event_city = check_for_element(driver, 'span[class="event-header__venue-name event-header__venue-name--timer truncate-text"]')
+                  total = check_for_element(driver, 'span[data-bdd="order-summary-ticket-quantity"]')
+                  data_to_send = f'*Усього квитків:* {total.text}\n'
+                  unit_1 = check_for_element(driver, 'span[data-bdd="order-summary-ticket-facevalue"]')
+                  
+                  event_name = check_for_element(driver, 'h2[class="event-header__title event-header__title--timer truncate-text"]')
+                  event_date = check_for_element(driver, 'span[class="event-header__date--timer truncate-text event-header__date"]')
+                  event_city = check_for_element(driver, 'span[class="event-header__venue-name event-header__venue-name--timer truncate-text"]')
 
-                    summary = check_for_element(driver, 'div[data-bdd="order-summary-ticket-price"]')
-                    event_category = check_for_element(driver, 'span[data-bdd="order-summary-ticket-type"]')
+                  summary = check_for_element(driver, 'div[data-bdd="order-summary-ticket-price"]')
+                  event_category = check_for_element(driver, 'span[data-bdd="order-summary-ticket-type"]')
 
-                    data_to_send += f'*Event:* {event_name.text}*\n*Date:* {event_date.text}\n*City:* {event_city.text}\n*Category:* {event_category.text}\n*1 Ticket price:* {unit_1.text}\n*Summary:* {summary.text}\n\n'
-                    data_to_send += f'*Url:* {driver.current_url}'
-                    post_request({"data": data_to_send, "adspower": adspower, "email": email, "password": password}, '/adspower')
-                    time.sleep(600)
-                    break
+                  data_to_send += f'*Event:* {event_name.text}*\n*Date:* {event_date.text}\n*City:* {event_city.text}\n*Category:* {event_category.text}\n*1 Ticket price:* {unit_1.text}\n*Summary:* {summary.text}\n\n'
+                  data_to_send += f'*Url:* {driver.current_url}'
+                  post_request({"data": data_to_send, "adspower_api": data['adspower_api'], "adspower_number": data['adspower_number']}, '/adspower')
+                  time.sleep(600)
+                  break
 
             except Exception as e: print(e)
-
         except Exception as e:
             print(e)
 
@@ -1175,6 +1166,33 @@ def click_with_scroll(driver, element, debug=False):
     except Exception as e:
         if debug: print(e)
         return False
+    
+
+def coordinate_click(driver, element):
+    for _ in range(10):
+      print('try to click')
+      try:
+        location = element.location  # {'x': x_position, 'y': y_position}
+        size = element.size  # {'width': width, 'height': height}
+        print(location, size)
+
+        # Calculate the bounding box (top-left and bottom-right positions)
+        x1 = int(location['x'])
+        y1 = int(location['y'])
+        x2 = x1 + int(size['width'])
+        y2 = y1 + int(size['height'])
+        
+        # Generate a random x, y within the bounding box
+        random_x = random.randint(x1, x2)
+        random_y = random.randint(y1, y2)
+
+        # Perform the click at the random coordinates
+        actions = ActionChains(driver)
+        actions.move_by_offset(random_x, random_y).click().perform()
+        return True
+      except Exception as e: 
+        print('coordinate_click function exception', e)
+        continue
 
 from selenium.common.exceptions import StaleElementReferenceException
 
@@ -1188,16 +1206,17 @@ def check_nearby_tickets(driver, x, aim_amount, temp_amount=1, visited=None):
         visited.add(x)
 
         # Find nearby elements by x, excluding the current one and already visited elements
+        print('before error')
         nearby_x = check_for_elements(driver, f'//*[@cx >= {x-20} and @cx <= {x+20} and @cx != {x} and @type="primary"]', xpath=True)
-        
+        print('after error')
         # Filter out circles that have already been visited
         nearby_x = [elem for elem in nearby_x if float(elem.get_attribute('cx')) not in visited]
 
         # Debugging: print how many elements are found and the current temp_amount
         print(f"Temp Amount: {temp_amount}, Nearby X: {len(nearby_x)}, Visited: {visited}")
-
+        
         # Base case: if the target amount has been reached
-        if aim_amount == temp_amount:
+        if aim_amount <= temp_amount:
             return True
 
         # If there are no more nearby elements to check, return False
@@ -1208,9 +1227,10 @@ def check_nearby_tickets(driver, x, aim_amount, temp_amount=1, visited=None):
         # Recursive case: Check nearby circles by x coordinates
         if nearby_x:
             # Click on the first nearby x circle before recursion
-            nearby_x[0].click()
+            loop_click(driver, nearby_x[0])
+            cx = nearby_x[0].get_attribute('cx')
 
-            if check_nearby_tickets(driver, nearby_x[0], aim_amount, temp_amount + 1, visited):
+            if check_nearby_tickets(driver, cx, aim_amount, temp_amount + 1, visited):
                 return True  # If recursion succeeds, return True
 
         # No valid nearby tickets left that meet the condition
@@ -1219,7 +1239,28 @@ def check_nearby_tickets(driver, x, aim_amount, temp_amount=1, visited=None):
     except StaleElementReferenceException: 
         nearby_x = check_for_elements(driver, f'//*[@cx >= {x-20} and @cx <= {x+20} and @cx != {x} and @type="primary"]', xpath=True)
         nearby_x = [e for e in nearby_x if float(e.get_attribute('cx')) not in visited]
+    except Exception as e: print('Exception in check_nearby_tickets function.', e)
 
+
+def loop_click(driver, nearby_x):
+  temp_cx = None
+  temp_cy = None
+  while True:
+    try:
+      temp_cx = nearby_x.get_attribute('cx')
+      temp_cy = nearby_x.get_attribute('cy')
+      print('before stale')
+      nearby_x.click()
+      return True
+    except StaleElementReferenceException:
+      print('stale')
+      stale_nearby = check_for_element(driver, f'//*[@cx == {temp_cx} and @cy == {temp_cy}]', xpath=True)
+      stale_nearby.click()
+      return True
+    except Exception as e: 
+      print('Exception in loop_click function.', e)
+      time.sleep(10)
+      return False
 
 
 def parse_range(s):
@@ -1362,8 +1403,10 @@ def run():
           check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
           if wait_for_element(driver, '//h2[contains(text(), "Search For Tickets")]', xpath=True, timeout=5):
               process_type_1(driver)
-          elif wait_for_element(driver, 'div[id="quickpicks"]', timeout=5):
+          elif wait_for_element(driver, 'div[id="quickpicks"]l', timeout=5):
             process_type_2(driver)
+          elif wait_for_element(driver, '#map-container', timeout=5):
+            process_type_4(driver)
 
 
 if __name__ == "__main__":
