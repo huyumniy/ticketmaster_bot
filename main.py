@@ -22,11 +22,6 @@ import random
 import sounddevice as sd
 import soundfile as sf
 from random import choice
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 import urllib3
 
 
@@ -213,46 +208,6 @@ def set_random_16_9_resolution(driver):
     driver.set_window_size(width, height)
 
 
-def get_data_from_google_sheets():
-    try:
-        # Authenticate with Google Sheets API using the credentials file
-        creds = None
-        if os.path.exists("token.json"):
-            creds = Credentials.from_authorized_user_file("token.json", SCOPES)
-
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-                creds = flow.run_local_server(port=0)
-
-            with open("token.json", "w") as token:
-                token.write(creds.to_json())
-
-        # Connect to Google Sheets API
-        service = build("sheets", "v4", credentials=creds)
-
-        # Define the range to fetch (assuming the data is in the first worksheet and starts from cell A2)
-        range_name = "main!A2:Q"
-
-        # Fetch the data using batchGet
-        request = service.spreadsheets().values().batchGet(spreadsheetId=SPREADSHEET_ID, ranges=[range_name])
-        response = request.execute()
-
-        # Extract the values from the response
-        values = response['valueRanges'][0]['values']
-
-        return values
-
-    except HttpError as error:
-        print(f"An HTTP error occurred: {error}")
-        return None
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
-
-
 def extract_price(raw_price):
   # Use regex to find all digit sequences with optional decimal points
   match = re.search(r'(\d+[.,]?\d*)', raw_price)
@@ -313,6 +268,27 @@ def wait_for_element(driver, selector, click=False, timeout=10, xpath=False, deb
     except Exception as e:
         if debug: print("selector: ", selector, "\n", e)
         return False
+    
+
+def old_wait_for_element(driver, selector, click=False, timeout=10, xpath=False, debug=False, scrollToBottom=False):
+  temp = 0
+  while True:
+    try:
+        if xpath:
+            element = driver.find_element(By.XPATH, selector)
+        else:
+            element = driver.find_element(By.CSS_SELECTOR, selector)
+        if click: 
+            driver.execute_script("arguments[0].scrollIntoView();", element)
+            # slow_mouse_move_to_element(driver, element)
+            element.click()
+        return element
+    except Exception as e: 
+        if debug: print("selector: ", selector, "\n", e)
+        if temp < timeout: time.sleep(1)
+        else: return False
+
+        
 
 
 def check_for_element(driver, selector, click=False, xpath=False, debug=False):
@@ -631,8 +607,12 @@ def process_type_1(driver):
 
                 selected_entry = ticket_data[random_key]
                 ticket = selected_entry['ticket']
-                plus = ticket.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"]')
-
+                check_for_element(ticket, './/div[2]/button', xpath=True, click=True)
+                plus = wait_for_element(ticket, 'button[data-testid="tselectionSpinbuttonPlus"]', timeout=2)
+                if not plus:
+                    if reload_time: time.sleep(reload_time)
+                    else: time.sleep(45)
+                    continue
                 if len(category_amount_dict) == 0:
                     print('IN ELSE')
                     slow_mouse_move_to_element(driver, plus)
@@ -1458,68 +1438,4 @@ if __name__ == "__main__":
                     port += 1
             except OSError as e:
                 print(e)
-    elif selected_model == '1':
-        data = get_data_from_google_sheets()
-        threads = []
-        for row in data:
-            near = row[0]
-            link = row[6]
-            types = int(row[1])
-            categories = row[2].split('\n')
-            
-            amounts = row[3].split('\n')
-            print(amounts)
-            price, levels = None, None
-            try:
-                price = row[4]
-                levels = row[5].split('\n')[0].split(' ')
-            except: pass
-            data = [row[7], row[8], row[9]]
-            proxy, proxy_url, reload_time, time_to_wait, adspower, email, password = None, None, None, None, None, None, None
-            try: 
-                proxy = row[10] 
-                proxy_list = ''
-                if ' ' in proxy: proxy_list = proxy.split(' ')
-                proxy_url = row[11]
-            except: pass
-            try:
-                adspower = row[14]
-            except: pass
-            try:
-                email = row[15]
-                password = row[16]
-                print(email, password)
-            except: pass
-            try: reload_time = int(row[12])
-            except Exception as e: print('Введіть reload_time в числовому форматі', e)
-            try: time_to_wait = int(row[13])
-            except Exception as e: print('Введіть time_to_wait в числовому форматі', e)
-            # try:
-            #     accounts_raw = row[14]
-            #     accounts = [{account.split(':')[0]: account.split(':')[1]} for account in accounts_raw.split(' ')]
-            # except Exception as e: print(e)
-            category_amount_dict = {}
-            if len(amounts) == 1 and len(categories) > 1:
-                for category in categories:
-                    category_amount_dict[category.strip()] = amounts[0].strip()
-            else:
-                for category, amount in zip(categories, amounts):
-                    category_amount_dict[category.strip()] = amount.strip()
-                    
-            print(category_amount_dict)
-            process_link = None
-            if types == 1: process_link = process_type_1
-            elif types == 2: process_link = process_type_1
-            elif types == 3: process_link = process_type_3
-            elif types == 4: process_link = process_type_4 
-            thread = threading.Thread(target=process_link, args=(link, category_amount_dict, data, 
-            proxy if not proxy_list else proxy_list, proxy_url, reload_time, time_to_wait, price, levels, email, password, adspower, near))
-            thread.start()
-            threads.append(thread)
-
-            delay = random.uniform(5, 10)
-            time.sleep(delay)
-        
-        for thread in threads:
-            thread.join()
         
