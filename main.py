@@ -515,6 +515,9 @@ def process_type_1(driver):
   price = data['price']
   reload_time = int(data['refresh_interval'])
   ranged_price = parse_range(price[0])
+  invitation_code = data['invitation_code']
+  print('INVITATION CODE')
+  print('INVITATION CODE', invitation_code)
   print('CATEGORIES', category_amount_dict)
   # driver = ''
   # print("ADSPOWER", adspower)
@@ -567,6 +570,10 @@ def process_type_1(driver):
             else: time.sleep(45)
             driver.refresh()
         except: pass
+        input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True, debug=True)
+        if input_invitation:
+          input_invitation.send_keys(invitation_code)
+          wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True, debug=True)
         check_for_element(driver, '#onetrust-reject-all-handler', click=True)
         tickets_tab = check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
         if not tickets_tab: print("did not manage to click on 'Find seats for me'")
@@ -574,13 +581,36 @@ def process_type_1(driver):
         #     driver.find_element(By.CSS_SELECTOR, 'svg[class="BaseSvg-sc-yh8lnd-0 MagnifyingGlassIcon___StyledBaseSvg-sc-1pooy9n-0 ckLyyv"]').click()
         # except: pass
         ticket_data = {}
+        wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
         tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
-        if not tickets: continue
+        if not tickets: 
+            print('no tickets')
+            if reload_time: time.sleep(reload_time)
+            else: time.sleep(45)
+            continue
+        #//span[contains(text(), 'Unlock')]
+        for ticket in tickets:
+            if invitation_code:
+              print('invitation', ticket)
+              if check_for_element(driver, "//span[contains(text(), 'Unlock')]", xpath=True, click=True):
+                  input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
+                  input_invitation.send_keys(invitation_code)
+                  wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
+        
+        wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
+        tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
+        
+        if not tickets: 
+            print('no tickets')
+            if reload_time: time.sleep(reload_time)
+            else: time.sleep(45)
+            continue
         for ticket in tickets:
             category_raw = check_for_element(ticket, './/div[1]/div[1]/div/span[1]', xpath=True)
             category = category_raw.text.split('\n')[0]
             ticket_price_raw = check_for_element(ticket, './/div[1]/div/div/span[2]', xpath=True)
             ticket_price = extract_price(ticket_price_raw.text)
+            
             # price = extract_price(ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-5 chohwl"]').text)
             ticket_data[category] = {"ticket": ticket, "price":ticket_price}
         limit = True
@@ -707,7 +737,8 @@ def process_type_1(driver):
             limit = False
     except Exception as e:
         print("EXCEPTION", e)
-        time.sleep(reload_time)
+        if reload_time: time.sleep(reload_time)
+        else: time.sleep(45)
         
 
 
@@ -1404,7 +1435,7 @@ def run():
     while True:
       if check_for_element(driver, 'aside[aria-label="Seat Map"]'):
           check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
-          if wait_for_element(driver, '//h2[contains(text(), "Search For Tickets")]', xpath=True, timeout=5):
+          if wait_for_element(driver, '//h2[contains(text(), "Search For Tickets")]', xpath=True, timeout=5) or wait_for_element(driver, '#main-content', timeout=5):
               process_type_1(driver)
           # elif wait_for_element(driver, 'div[id="quickpicks"]l', timeout=5):
           #   process_type_2(driver)
