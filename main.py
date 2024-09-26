@@ -553,7 +553,7 @@ def process_type_1(driver):
             print('block')
             if proxy == "vpn":
                 if reload_time: time.sleep(reload_time)
-                driver.delete_all_cookies()
+                # driver.delete_all_cookies()
                 set_random_16_9_resolution(driver)
                 reconnect_vpn(driver, link)
             if reload_time: time.sleep(reload_time)
@@ -671,7 +671,7 @@ def process_type_1(driver):
                   if check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Something went wrong...")]', xpath=True)\
                   or check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Ticket Purchase Blocked")]', xpath=True):
                     if reload_time: time.sleep(int(reload_time))
-                    driver.delete_all_cookies()
+                    # driver.delete_all_cookies()
                     set_random_16_9_resolution(driver)
                     if proxy == "vpn":
                       reconnect_vpn(driver, link)
