@@ -570,10 +570,10 @@ def process_type_1(driver):
             else: time.sleep(45)
             driver.refresh()
         except: pass
-        input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True, debug=True)
+        input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
         if input_invitation:
           input_invitation.send_keys(invitation_code)
-          wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True, debug=True)
+          wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
         check_for_element(driver, '#onetrust-reject-all-handler', click=True)
         tickets_tab = check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
         if not tickets_tab: print("did not manage to click on 'Find seats for me'")
