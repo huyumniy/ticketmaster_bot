@@ -506,7 +506,7 @@ def queue_bypass(driver, email, password):
             break
     return True
 
-@eel.expose
+
 def process_type_1(driver):
   global data
   link = data['link']
@@ -680,8 +680,8 @@ def process_type_1(driver):
                   check_for_element(driver, '#onetrust-reject-all-handler', click=True)
                   if look_for_tickets(driver): 
                     if 'checkout' in driver.current_url:
-                      data, fs = sf.read('noti.wav', dtype='float32')  
-                      sd.play(data, fs)
+                      data_to_play, fs = sf.read('noti.wav', dtype='float32')  
+                      sd.play(data_to_play, fs)
                       status = sd.wait()
                       cookie = driver.get_cookies()
                       ua = driver.execute_script('return navigator.userAgent')
@@ -699,10 +699,10 @@ def process_type_1(driver):
                       print(num_of_tickets, total_cart)
                       
                       full_data = {"type": 1, 'url': driver.current_url, 'name': None, 'date': None, 'city': None,
-                        'proxy': proxy, 'cookie': cookie, 'user-agent': ua, 'num_of_tickets': num_of_tickets, 'total_cart': total_cart}
+                        'proxy': proxy, 'cookie': cookie, 'user-agent': ua, 'num_of_tickets': num_of_tickets, 'total_cart': total_cart, 'adspower': data['adspower_number']}
                       try: post_request(full_data)
                       except: print("Can't send message. Slack-bot is off")
-                      time.sleep(600)
+                      input('Continue?')
                       break
             limit = False
     except Exception as e:
@@ -1332,12 +1332,13 @@ data = {
     'refresh_interval': 30,
     'adspower_number': '',
     'adspower_api': '',
-    'proxy': ''
+    'proxy': '',
+    'invitation_code': ''
 }
 
 
 @eel.expose
-def main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber=None, adspowerAPI=None, proxy=None):
+def main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber=None, adspowerAPI=None, proxy=None, invitationCode=None):
     global data
     data.update({
         'link': link,
@@ -1347,14 +1348,15 @@ def main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumbe
         'refresh_interval': refreshInterval,
         'adspower_number': adspowerNumber,
         'adspower_api': adspowerAPI,
-        'proxy': proxy
+        'proxy': proxy,
+        'invitation_code': invitationCode
     })
     print(data)
     eel.spawn(run)
 
 
 @eel.expose
-def restart_main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber=None, adspowerAPI=None, proxy=None):
+def restart_main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber=None, adspowerAPI=None, proxy=None, invitationCode=None):
     print("Restarting the process...")
     global data
     data.update({
@@ -1365,7 +1367,8 @@ def restart_main(link, categoryAmountDict, price, isNear, refreshInterval, adspo
         'refresh_interval': refreshInterval,
         'adspower_number': adspowerNumber,
         'adspower_api': adspowerAPI,
-        'proxy': proxy
+        'proxy': proxy,
+        'invitation_code': invitationCode
     })
     print(data)
     print("Process restarted.")

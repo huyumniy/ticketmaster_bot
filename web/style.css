@@ -80,10 +80,17 @@ body {
     margin: 0px 8rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     overflow: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+.code {
+    display: flex;
+    gap: 12px;
+    margin: 10px 0;
 }
 
 .main::-webkit-scrollbar {
@@ -130,6 +137,7 @@ body {
     color: aliceblue;
 }
 
+
 .little-size-input {
     display: flex;
     border: solid rgba(255, 255, 255, .4) 1px;
@@ -141,6 +149,31 @@ body {
     width: 100px;
     font-size: 16px;
     color: aliceblue;
+}
+
+
+.advanced_mode {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    gap: 6px;
+}
+
+.advanced_settings {
+    display: none;
+}
+
+.advanced_mode label {
+    cursor: pointer;
+}
+
+.advanced_mode input {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
 }
 
 

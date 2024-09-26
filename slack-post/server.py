@@ -90,7 +90,7 @@ def create_book():
 
 @app.route('/book', methods=['POST'])
 def slack_post():
-    data_to_send = f"\n*url:* {request.json['url']}\n*name:* {request.json['name']}\n*date:* {request.json['date']}\n*Кількість квитків:* {request.json['num_of_tickets']}\n*Summary:* {request.json['total_cart']}\n*proxy:* {request.json['proxy']}\n*city:* {request.json['city']}"
+    data_to_send = f"\n*url:* {request.json['url']}\n*name:* {request.json['name']}\n*date:* {request.json['date']}\n*Кількість квитків:* {request.json['num_of_tickets']}\n*Summary:* {request.json['total_cart']}\n*proxy:* {request.json['proxy']}\n*adspower:* {request.json['adspower']}"
     send_to_group_channel(data_to_send, request.json['cookie'], request.json['user-agent'])
     return ''
 

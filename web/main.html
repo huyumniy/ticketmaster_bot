@@ -10,6 +10,10 @@
 </head>
 <body>
     <div class="main">
+        <div class="advanced_mode">
+            <label for="advanced_mode">Розширені параметри</label>
+            <input id="advanced_mode" name="advanced_mode" type="checkbox">
+        </div>
         <div class="choose_model">
             <label for="model">Використовувати adspower?</label>
             <input type="checkbox" id="model" name="model">
@@ -43,6 +47,13 @@
             <h3>Інтервал оновлення</h3>
             <input id="refreshInterval" type="text" class="little-size-input" name="refresh-interval" placeholder="30">
         </div>
+        <hr class="hr">
+        <div class="advanced_settings">
+            <div class="code">
+                <h3>Код активації</h3>
+                <input id="code_input" class="little-size-input" type="text">
+            </div>
+        </div>
         <div class="buttons">
             <div class="start">
               <button id="run" class="active">Start</button>
@@ -50,7 +61,7 @@
           <div class="restart">
             <button id="restart" class="disabled">Restart</button>
         </div>
-        </div>
+    </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -100,18 +111,23 @@
                 }
                 console.log(categoryAmountDict)
                 console.log('Refresh interval:', refreshInterval);
+                let is_advanced = document.querySelector('#advanced_mode').checked
+                let invitation_code = null
+                if (is_advanced) {
+                    invitation_code = document.querySelector('#code_input').value
+                }
                 if (document.querySelector('#model').checked) {
                     let adspowerNumber = document.querySelector('#proxy').value
                     let adspowerAPI = document.querySelector('#adspowerApi').value
                     console.log('Adspower number:', adspowerNumber)
                     console.log('Adspower API:', adspowerAPI)
                     document.querySelector('#restart').setAttribute("class", "active-restart");
-                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber, adspowerAPI, null)();
+                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, adspowerNumber, adspowerAPI, null, invitation_code)();
                 } else {
                     let proxy = document.querySelector('#proxy').value
                     console.log('Proxy:', proxy)
                     document.querySelector('#restart').setAttribute("class", "active-restart");
-                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, null, null, proxy)();
+                    await eel.main(link, categoryAmountDict, price, isNear, refreshInterval, null, null, proxy, invitation_code)();
                 }
             }
         }
@@ -142,6 +158,16 @@
 
             categoryContainer.appendChild(newCategoryDiv);
         }
+
+        document.getElementById('advanced_mode').addEventListener('change', function() {
+            const advancedSettings = document.querySelector('.advanced_settings');
+            
+            if (this.checked) {
+                advancedSettings.style.display = 'block';  // Hide advanced settings when checked
+            } else {
+                advancedSettings.style.display = 'none';  // Show advanced settings when unchecked
+            }
+        });
 
         // Function to get all category input values
         function getCategoryValues() {
