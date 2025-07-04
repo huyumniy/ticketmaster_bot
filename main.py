@@ -492,41 +492,12 @@ def process_type_1(driver):
   reload_time = int(data['refresh_interval'])
   ranged_price = parse_range(price[0])
   invitation_code = data['invitation_code']
-  print('INVITATION CODE')
   print('INVITATION CODE', invitation_code)
   print('CATEGORIES', category_amount_dict)
-  # driver = ''
-  # print("ADSPOWER", adspower)
-  # if not adspower:
-  #   temp_proxy = 'vpn'
-  #   if proxy != 'vpn':
-  #       temp_proxy = proxy if not isinstance(proxy, list) else choice(proxy)
-  #   driver = create_new_connection(temp_proxy, link)
-  #   time.sleep(2)
-  #   if proxy == 'vpn':
-  #       tabs = driver.window_handles
-  #       driver.switch_to.window(tabs[1])
-  #       driver.close()
-  #       driver.switch_to.window(tabs[0])
-  #   if proxy == 'vpn': reconnect_vpn(driver, link)
-  # elif adspower:
-  #     if not proxy:
-  #       print('NOT PROXY')
-  #       driver = selenium_connect('', adspower)
-  #     elif proxy != 'vpn':
-  #       print('PROXY != vpn')
-  #       temp_proxy = proxy if not isinstance(proxy, list) else choice(proxy)
-  #     elif proxy:
-  #       print('PROXY')
-  #       pass
   while True:
     print('in while True')
     try:
         driver.refresh()
-        # try:
-        #     is_queue = wait_for_element(driver, '//*[contains(text(), "Join the Queue")]', xpath=True, click=True)
-        #     if is_queue: input('continue?')
-        # except: pass
         try:
             driver.find_element(By.CSS_SELECTOR, 'div[id="t1"]')
             print('block')
@@ -590,8 +561,11 @@ def process_type_1(driver):
             # price = extract_price(ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-5 chohwl"]').text)
             ticket_data[category] = {"ticket": ticket, "price":ticket_price}
         limit = True
+        print(ticket_data)
+        
         
         while limit:
+            print('in limit')
             if ticket_data:
                 check_for_element(driver, '#onetrust-reject-all-handler', click=True)
                 # Randomly choose a key from ticket_data
@@ -606,21 +580,24 @@ def process_type_1(driver):
                     break
 
                 selected_entry = ticket_data[random_key]
+                print(selected_entry)
                 ticket = selected_entry['ticket']
                 check_for_element(ticket, './/div[2]/button', xpath=True, click=True)
-                plus = wait_for_element(ticket, 'button[data-testid="tselectionSpinbuttonPlus"]', timeout=2)
+                time.sleep(2)
+                plus = check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)')
                 if not plus:
+                    print('no plus button')
                     if reload_time: time.sleep(reload_time)
                     else: time.sleep(45)
-                    continue
+                    break
                 if len(category_amount_dict) == 0:
                     print('IN ELSE')
                     slow_mouse_move_to_element(driver, plus)
                     while True:
                         try: 
                             plus.click()
-                            if check_for_element(ticket, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]') or check_for_element(driver, 'p[data-testid="ticketLimitMsg"]'): break
-                        except: pass
+                            if check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]') or check_for_element(driver, 'p[data-testid="ticketLimitMsg"]'): break
+                        except Exception as e: print(e)
 
                 elif category_amount_dict[random_key]:
                     print('IN ELIF')
@@ -630,13 +607,13 @@ def process_type_1(driver):
                         necessary_amount = random.randint(amount_range[0], amount_range[1])
                     else: necessary_amount = category_amount_dict
                     print(necessary_amount)
-                    amount = int(ticket.find_element(By.CSS_SELECTOR, 'span[data-testid="tselectionSpinbuttonValue"]').text)
+                    amount = int(ticket.find_element(By.CSS_SELECTOR, '[data-testid="quantityStepper"] > span').text)
                     slow_mouse_move_to_element(driver, plus)
                     for i in range (int(necessary_amount) - amount):
                         try: 
                             plus.click()
                             if driver.find_element(By.CSS_SELECTOR, 'p[data-testid="ticketLimitMsg"]'): break
-                        except: pass
+                        except Exception as e: print(e)
                 
                 elif len(category_amount_dict) == 1 and safe_list_get(list(category_amount_dict.keys()), 0) == '':
                     print(' IN IF')
@@ -647,21 +624,23 @@ def process_type_1(driver):
                             necessary_amount = random.randint(amount_range[0], amount_range[1])
                         else: necessary_amount = category_amount_dict
                         print(necessary_amount)
-                        amount = int(ticket.find_element(By.CSS_SELECTOR, 'span[data-testid="tselectionSpinbuttonValue"]').text)
+                        amount = int(ticket.find_element(By.CSS_SELECTOR, '[data-testid="quantityStepper"] > span').text)
                         slow_mouse_move_to_element(driver, plus)
                         for i in range (int(necessary_amount) - amount):
                             try: 
                                 
                                 plus.click()
-                                if driver.find_element(By.CSS_SELECTOR, 'p[data-testid="ticketLimitMsg"]'): break
-                            except: pass
+                                if check_for_element(driver, 'p[data-testid="ticketLimitMsg"]') or check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]'): break
+                            except Exception as e:
+                                print(e)
                     else:
                         slow_mouse_move_to_element(driver, plus)
                         while True:
                             try: 
                                 plus.click()
-                                if driver.find_element(By.CSS_SELECTOR, 'p[data-testid="ticketLimitMsg"]'): break
-                            except: pass
+                                if check_for_element(driver, 'p[data-testid="ticketLimitMsg"]') or check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]'): break
+                            except Exception as e:
+                                print(e)
                 print('nothing')
                 # Trying to buy ticket with choosen settings
                 for _ in range(0, 10):
@@ -729,8 +708,11 @@ def is_within_range(target, lower_bound, upper_bound):
     return False
 
 
-def process_type_2(link, category_amount_dict, datas, proxy, proxy_url, reload_time):
-    driver = selenium_connect(proxy)
+# //span[ contains(text(), 'Standard Admission') and @id]
+def process_type_2(link, category_amount_dict, datas, proxy, proxy_url, reload_time, time_to_wait, price, levels, accounts, adspower=None, near=None):
+    driver = ''
+    temp_proxy = proxy if not isinstance(proxy, list) else choice(proxy)
+    driver = create_new_connection(temp_proxy, link)
     while True:
         try:
             try:
@@ -744,50 +726,117 @@ def process_type_2(link, category_amount_dict, datas, proxy, proxy_url, reload_t
             except: pass
             try:
                 driver.find_element(By.CSS_SELECTOR, 'div[id="t1"]')
-                if proxy_url: change_ip(proxy_url)
-                time.sleep(45)
+                driver.close()
+                driver.quit()
+                driver = create_new_connection(temp_proxy, link)
                 continue
             except: pass
             try:
-                driver.find_element(By.CSS_SELECTOR, 'div[class="ToggleSwitch__VisibleToggle-sc-tcnwub-2 hNnBYt"]').click()
+                driver.find_element(By.CSS_SELECTOR, '#onetrust-reject-all-handler').click()
             except: pass
             try:
-                random_key = random.choice(list(category_amount_dict.keys())).strip()
-                driver.find_element(By.CSS_SELECTOR, 'button[class="sc-g9wzf-2 japIkg"]').click()
-                driver.find_element(By.XPATH, f'//span[ contains(text(), "{random_key}")]').click()
-                driver.find_element(By.XPATH, '//span[ contains(text(), "All Ticket Types")]').click()
-                time.sleep(2)
-                plus = driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"]')
+                empty_category = True
+                try:
+                    if not '' in category_amount_dict.keys(): empty_category = False
+                except: pass
+                print(empty_category)
+                if not empty_category:
+                    driver.find_element(By.CSS_SELECTOR, '#edp-quantity-filter-button').click()
+                    time.sleep(3)
+                    
+                    driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="unselectAllTicketTypesBtn"]').click()
+                    random_key = random.choice(list(category_amount_dict.keys())).strip()
+                    try:
+                        driver.find_element(By.XPATH, f"//ul/li/label/span[ contains(text(), '{random_key}')]").click()
+                    except:
+                        driver.find_element(By.XPATH, f"//span[ contains(text(), '{random_key}') and @id]").click()
+                    select_element = driver.find_element(By.CSS_SELECTOR, '#filter-bar-quantity')
+                    select = Select(select_element)
+                    select.select_by_index(int(category_amount_dict[random_key])-1)
+                    driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="applyFilterBtn"]').click()
                 
-                print(category_amount_dict)
-                if category_amount_dict[random_key]:
-                    amount = int(driver.find_element(By.CSS_SELECTOR, 'span[data-testid="tselectionSpinbuttonValue"]').text)
-                    for i in range (int(category_amount_dict[random_key]) - amount):
-                        try: 
-                            if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
-                            plus.click()
-                        except: pass
-                else:
-                    while True:
-                        try:
-                            if driver.find_element(By.CSS_SELECTOR, 'button[data-testid="tselectionSpinbuttonPlus"][disabled]'): break
-                            plus.click()
-                        except: pass
-                if check_for_element(driver, '//div[@data-testid="reserveError"]', xpath=True):
-                    if proxy_url: change_ip(proxy_url)
-                    time.sleep(45)
-                    continue
-                if look_for_tickets(driver) and not wait_for_button(driver): 
-                    if 'checkout' in driver.current_url:
-                        data, fs = sf.read('noti.wav', dtype='float32')  
-                        sd.play(data, fs)
-                        status = sd.wait()
-                        input('Continue?')
+                while True:
+                    if wait_for_something(driver, '#quickpicks-listings'):
+                        tickets = driver.find_elements(By.CSS_SELECTOR, '#quickpicks-listings > ul > li')
+
+                        # inp = check_for_element(driver, 'input[aria-describedby="label-description-max"]')
+                        # inp.send_keys(str(price))
+                        ticket_sorted = []
+                        for ticket in tickets:
+                            # Extract the price attribute
+                            ticket_price = ticket.get_attribute("data-price")
+                            # Convert the price to a float (remove '$' sign if necessary)
+                            ticket_price = float(ticket_price.replace("$", ""))
+                            # Append the price and the ticket element to the list
+                            ticket_sorted.append((ticket_price, ticket))
+
+                        # Sort the list of ticket prices based on the price
+                        ticket_sorted.sort(key=lambda x: x[0])
+
+                        for ticket_price, ticket in ticket_sorted:
+                            print(price)
+                            print(ticket_price, ticket)
+                            if price: 
+                                if not ticket_price <= price: continue
+                            # while True:
+                            #     if levels:
+                            #         sec = ticket.find_element(By.CSS_SELECTOR, 'div > div:nth-child(1) > span').text.split(' • ')[0].split(' ')[1]
+                            #         value = is_within_range(int(sec), int(levels[0]), int(levels[-1]))
+                            #     else: break
+                            #     if not empty_category:
+                            #         if value and int(category_amount_dict[random_key]) < 2: continue
+                            #         elif value and int(category_amount_dict[random_key]) >= 2: break
+                            #         else: break
+                            #     else:
+                            #         if value and int(category_amount_dict[random.choice(list(category_amount_dict.keys())).strip()]) < 2: continue
+                            #         elif value and int(category_amount_dict[random.choice(list(category_amount_dict.keys())).strip()]) >= 2: break
+                            #         else: break
+                            ticket.click()
+                            wait_for_clickable(driver, 'button[data-bdd="offer-card-buy-button"]')
+                            total = driver.find_element(By.CSS_SELECTOR, 'div[data-bdd="offer-card-bag"] > div[data-testid="OrderBreakdownTestId"] > div > div >div:nth-child(2)')
+                            amount = driver.find_element(By.CSS_SELECTOR, 'div[data-bdd="offer-card-bag"] > div[data-testid="OrderBreakdownTestId"] > div > div:nth-child(2)')
+                            total_text, amount_text = None, None
+                            if total and amount: 
+                                total_text = total.text
+                                amount_text = amount.text
+                            print(amount_text, total_text)
+                            driver.find_element(By.CSS_SELECTOR, 'button[data-bdd="offer-card-buy-button"]').click()
+                            modal = wait_for_element(driver, '#modalContent', timeout=5)
+                            if modal: modal.find_element(By.CSS_SELECTOR, 'div:nth-child(3) > div >button > span').click()
+                            temp_account = None
+                            WebDriverWait(driver, 30).until(lambda driver: 'checkout' in driver.current_url)
+                            if accounts:
+                                try:
+                                    temp_account = choice(accounts)
+                                    check_for_element(driver, 'input[id="email[objectobject]__input"]', click=True).send_keys(temp_account.keys())
+                                    check_for_element(driver, 'input[id="password[objectobject]__input"]', click=True).send_keys(temp_account.values())
+                                    check_for_element(driver, 'button[data-bdd="sign-in-button"]', click=True)
+                                except Exception as e: print(e)
+                            print(driver.current_url.split('.')[0])
+                            WebDriverWait(driver, 30).until(lambda driver: 'checkout' in driver.current_url.split('.')[0])
+                            try:
+                                total_text = check_for_element(driver, 'div[data-tid="summary-quantity-type"] > span:nth-child(1)').text + check_for_element(driver, 'div[data-tid="summary-quantity-type"] > span:nth-child(2)')
+                                amount_text = check_for_element(driver, 'div[data-tid="summary-price"] > span').text
+                            except Exception as e: print(e)
+                            while driver.execute_script("return document.readyState") != "complete": pass
+                            data, fs = sf.read('noti.wav', dtype='float32')  
+                            cookie = driver.get_cookies()
+                            ua = driver.execute_script('return navigator.userAgent')
+                            sd.play(data, fs)
+                            status = sd.wait()
+                            if datas: full_data = {"type": 1, 'url': driver.current_url, 'name': datas[0], 'date': datas[1], 'num_of_tickets': amount_text,
+                                'total_cart': total_text, 'city': datas[2],'proxy': temp_proxy, 'cookie': cookie, 'user-agent': ua, 'account': temp_account if accounts else ' '}
+                            # else: full_data = {"type": 1, 'url': driver.current_url, 'name': 'no name', 'None': 'None', 'city': 'None'}
+                            post_request(data=full_data)
+                            time.sleep(600)
+                            break
+                        select.select_by_index(int(category_amount_dict[random_key]))
+                        select.select_by_index(int(category_amount_dict[random_key])-1)
             except Exception as e:
                 print(e)
                 write_error_to_file(e)
         except Exception as e:
-            print(e)
+            pass
 
 # //span[ contains(text(), 'Standard Admission') and @id]
 def process_type_3(link, category_amount_dict, datas, proxy, proxy_url, reload_time, time_to_wait, price, levels, accounts, adspower=None, near=None):
@@ -1013,10 +1062,10 @@ def process_type_4(driver):
                         pass
                     elif amount > our_amount:
                         for _ in range(amount - our_amount):
-                            check_for_element(driver, 'button[data-testid="tselectionSpinbuttonPlus"]',click=True, debug=True)
+                            check_for_element(driver, 'div[data-testid="quantityStepper"] > button:nth-child(3)',click=True, debug=True)
                     elif amount < our_amount:
                         for _ in range(our_amount - amount):
-                            check_for_element(driver, 'button[data-testid="tselectionSpinbuttonPlus"]',click=True, debug=True)
+                            check_for_element(driver, 'div[data-testid="quantityStepper"] > button:nth-child(3)',click=True, debug=True)
                 # if price: 
                 #     price_arr = parse_range(price)
                 #     print(price_arr)
@@ -1128,7 +1177,7 @@ def process_type_4(driver):
 
                     random_ticket = random.choice(tickets)
                     for _ in range(our_amount):
-                        plus_button = check_for_element(random_ticket, 'button[data-testid="tselectionSpinbuttonPlus"]')
+                        plus_button = check_for_element(random_ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)')
                         if plus_button: plus_button.click()
 
                     check_for_element(driver, 'button[data-testid="gaToolTipBtn"]', click=True)
@@ -1419,23 +1468,21 @@ def run():
               process_type_1(driver)
           # elif wait_for_element(driver, 'div[id="quickpicks"]l', timeout=5):
           #   process_type_2(driver)
-          # elif wait_for_element(driver, '#map-container', timeout=5):
-          #   process_type_4(driver)
+        #   elif wait_for_element(driver, '#map-container', timeout=5):
+        #     process_type_4(driver)
 
 
 if __name__ == "__main__":
-    selected_model = check_model()
-    if selected_model == '0':
-        eel.init('web')
+    eel.init('web')
 
-        port = 8000
-        while True:
-            try:
-                if not is_port_open('localhost', port):
-                    eel.start('main.html', size=(700, 800), port=port)
-                    break
-                else:
-                    port += 1
-            except OSError as e:
-                print(e)
+    port = 8000
+    while True:
+        try:
+            if not is_port_open('localhost', port):
+                eel.start('main.html', size=(700, 800), port=port)
+                break
+            else:
+                port += 1
+        except OSError as e:
+            print(e)
         
