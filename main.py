@@ -484,220 +484,200 @@ def queue_bypass(driver, email, password):
 
 
 def process_type_1(driver):
-  global data
-  link = data['link']
-  category_amount_dict = data['category_amount_dict']
-  proxy = data['proxy']
-  price = data['price']
-  reload_time = int(data['refresh_interval'])
-  ranged_price = parse_range(price[0])
-  invitation_code = data['invitation_code']
-  print('INVITATION CODE', invitation_code)
-  print('CATEGORIES', category_amount_dict)
-  while True:
-    print('in while True')
-    try:
-        driver.refresh()
+    global data
+    link = data['link']
+    category_amount_dict = data['category_amount_dict']
+    proxy = data['proxy']
+    price = data['price']
+    reload_time = int(data['refresh_interval'])
+    ranged_price = parse_range(price[0])
+    invitation_code = data['invitation_code']
+    print('INVITATION CODE', invitation_code)
+    print('CATEGORIES', category_amount_dict)
+
+    while True:
+        print('in while True')
         try:
-            driver.find_element(By.CSS_SELECTOR, 'div[id="t1"]')
-            print('block')
-            if proxy == "vpn":
-                if reload_time: time.sleep(reload_time)
-                # driver.delete_all_cookies()
-                set_random_16_9_resolution(driver)
-                reconnect_vpn(driver, link)
-            if reload_time: time.sleep(reload_time)
-            else: time.sleep(60)
-            continue
-        except: pass
-        try:
-            check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-            driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
-            if reload_time: time.sleep(reload_time)
-            else: time.sleep(45)
             driver.refresh()
-        except: pass
-        input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
-        if input_invitation:
-          input_invitation.send_keys(invitation_code)
-          wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
-        check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-        tickets_tab = check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
-        if not tickets_tab: print("did not manage to click on 'Find seats for me'")
-        # try:
-        #     driver.find_element(By.CSS_SELECTOR, 'svg[class="BaseSvg-sc-yh8lnd-0 MagnifyingGlassIcon___StyledBaseSvg-sc-1pooy9n-0 ckLyyv"]').click()
-        # except: pass
-        ticket_data = {}
-        wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
-        tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
-        if not tickets: 
-            print('no tickets')
-            if reload_time: time.sleep(reload_time)
-            else: time.sleep(45)
-            continue
-        #//span[contains(text(), 'Unlock')]
-        for ticket in tickets:
-            if invitation_code:
-              print('invitation', ticket)
-              if check_for_element(driver, "//span[contains(text(), 'Unlock')]", xpath=True, click=True):
-                  input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
-                  input_invitation.send_keys(invitation_code)
-                  wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
-        
-        wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
-        tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
-        
-        if not tickets: 
-            print('no tickets')
-            if reload_time: time.sleep(reload_time)
-            else: time.sleep(45)
-            continue
-        for ticket in tickets:
-            category_raw = check_for_element(ticket, './/div[1]/div[1]/div/span[1]', xpath=True)
-            category = category_raw.text.split('\n')[0]
-            ticket_price_raw = check_for_element(ticket, './/div[1]/div/div/span[2]', xpath=True)
-            ticket_price = extract_price(ticket_price_raw.text)
-            
-            # price = extract_price(ticket.find_element(By.CSS_SELECTOR, 'span[class="sc-148tjjv-5 chohwl"]').text)
-            ticket_data[category] = {"ticket": ticket, "price":ticket_price}
-        limit = True
-        print(ticket_data)
-        
-        
-        while limit:
-            print('in limit')
-            if ticket_data:
+            # handle blocking screen
+            try:
+                driver.find_element(By.CSS_SELECTOR, 'div[id="t1"]')
+                print('block')
+                if proxy == "vpn":
+                    if reload_time: time.sleep(reload_time)
+                    set_random_16_9_resolution(driver)
+                    reconnect_vpn(driver, link)
+                if reload_time: time.sleep(reload_time)
+                else: time.sleep(60)
+                continue
+            except: pass
+
+            # handle interruption
+            try:
                 check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                # Randomly choose a key from ticket_data
+                driver.find_element(By.XPATH, '//div[text()="Pardon the Interruption"]')
+                if reload_time: time.sleep(reload_time)
+                else: time.sleep(45)
+                driver.refresh()
+            except: pass
+
+            # enter invitation code if prompted
+            input_invitation = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
+            if input_invitation:
+                input_invitation.send_keys(invitation_code)
+                wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
+
+            check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+            tickets_tab = check_for_element(driver, '//aside[@aria-label="Seat Map"]/div[1]/button[2]', xpath=True, click=True)
+            if not tickets_tab:
+                print("did not manage to click on 'Find seats for me'")
+
+            ticket_data = {}
+            # load ticket list
+            wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
+            tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
+            if not tickets:
+                print('no tickets')
+                time.sleep(reload_time or 45)
+                continue
+
+            # retry unlocking tickets
+            for ticket in tickets:
+                if invitation_code:
+                    if check_for_element(driver, "//span[contains(text(), 'Unlock')]", xpath=True, click=True):
+                        code_input = wait_for_element(driver,'input[placeholder="Enter Code"]', timeout=2, click=True)
+                        code_input.send_keys(invitation_code)
+                        wait_for_element(driver, '//section/form/button[@type="submit"]', timeout=2, xpath=True, click=True)
+
+            # re-fetch tickets after unlocking
+            wait_for_element(driver, '//*[@id="list-view"]/div/div[1]/ul/li', timeout=5, xpath=True)
+            tickets = check_for_elements(driver, '//*[@id="list-view"]/div/div[1]/ul/li', xpath=True)
+            if not tickets:
+                print('no tickets')
+                time.sleep(reload_time or 45)
+                continue
+
+            # collect categories and prices
+            for ticket in tickets:
+                category_raw = check_for_element(ticket, './/div[1]/div[1]/div/span[1]', xpath=True)
+                category = category_raw.text.split('\n')[0]
+                ticket_price_raw = check_for_element(ticket, './/div[1]/div/div/span[2]', xpath=True)
+                ticket_price = extract_price(ticket_price_raw.text)
+                ticket_data[category] = {"ticket": ticket, "price": ticket_price}
+
+            print(ticket_data)
+            limit = True
+
+            while limit and ticket_data:
+                print('in limit')
+                check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+
+                # choose a random valid category
                 while True:
                     random_key = choice(list(ticket_data.keys()))
-                    random_key_value = ticket_data[random_key]
-                    random_price = random_key_value['price']
-                    if len(category_amount_dict) == 0: break
-                    if len(category_amount_dict) == 1 and list(category_amount_dict.keys())[0] == '': break
-                    if random_price <= int(ranged_price[0]) or random_price >= int(ranged_price[1]): continue
-                    if random_key not in category_amount_dict.keys(): continue
+                    random_price = ticket_data[random_key]['price']
+                    if not category_amount_dict or list(category_amount_dict.keys()) == ['']:
+                        break
+                    if not (ranged_price[0] <= random_price <= ranged_price[1]):
+                        continue
+                    if random_key not in category_amount_dict:
+                        continue
                     break
 
-                selected_entry = ticket_data[random_key]
-                print(selected_entry)
-                ticket = selected_entry['ticket']
+                selected = ticket_data[random_key]
+                ticket = selected['ticket']
+                print(selected)
                 check_for_element(ticket, './/div[2]/button', xpath=True, click=True)
                 time.sleep(2)
                 plus = check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)')
                 if not plus:
                     print('no plus button')
-                    if reload_time: time.sleep(reload_time)
-                    else: time.sleep(45)
+                    time.sleep(reload_time or 45)
                     break
-                if len(category_amount_dict) == 0:
-                    print('IN ELSE')
+
+                # current amount
+                amount = int(ticket.find_element(By.CSS_SELECTOR, '[data-testid="quantityStepper"] > span').text)
+
+                # determine necessary amount
+                if category_amount_dict and random_key in category_amount_dict:
+                    amount_spec = category_amount_dict[random_key]
+                elif category_amount_dict and '' in category_amount_dict:
+                    amount_spec = category_amount_dict['']
+                else:
+                    amount_spec = None
+
+                if amount_spec:
+                    rng = parse_range(amount_spec)
+                    necessary_amount = random.randrange(rng[0], rng[1] + 1) if rng else int(amount_spec)
+                else:
+                    necessary_amount = None
+
+                # adjust quantity
+                diff = (necessary_amount - amount) if necessary_amount is not None else None
+                if diff is None:
+                    # no limit: increment until max
                     slow_mouse_move_to_element(driver, plus)
                     while True:
-                        try: 
-                            plus.click()
-                            if check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]') or check_for_element(driver, 'p[data-testid="ticketLimitMsg"]'): break
-                        except Exception as e: print(e)
-
-                elif category_amount_dict[random_key]:
-                    print('IN ELIF')
-                    amount_range = parse_range(category_amount_dict[random_key])
-                    necessary_amount = ''
-                    if amount_range:
-                        necessary_amount = random.randint(amount_range[0], amount_range[1])
-                    else: necessary_amount = category_amount_dict
-                    print(necessary_amount)
-                    amount = int(ticket.find_element(By.CSS_SELECTOR, '[data-testid="quantityStepper"] > span').text)
-                    slow_mouse_move_to_element(driver, plus)
-                    for i in range (int(necessary_amount) - amount):
-                        try: 
-                            plus.click()
-                            if driver.find_element(By.CSS_SELECTOR, 'p[data-testid="ticketLimitMsg"]'): break
-                        except Exception as e: print(e)
-                
-                elif len(category_amount_dict) == 1 and safe_list_get(list(category_amount_dict.keys()), 0) == '':
-                    print(' IN IF')
-                    if category_amount_dict['']:
-                        amount_range = parse_range(category_amount_dict[''])
-                        necessary_amount = ''
-                        if amount_range:
-                            necessary_amount = random.randint(amount_range[0], amount_range[1])
-                        else: necessary_amount = category_amount_dict
-                        print(necessary_amount)
-                        amount = int(ticket.find_element(By.CSS_SELECTOR, '[data-testid="quantityStepper"] > span').text)
-                        slow_mouse_move_to_element(driver, plus)
-                        for i in range (int(necessary_amount) - amount):
-                            try: 
-                                
-                                plus.click()
-                                if check_for_element(driver, 'p[data-testid="ticketLimitMsg"]') or check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]'): break
-                            except Exception as e:
-                                print(e)
-                    else:
-                        slow_mouse_move_to_element(driver, plus)
-                        while True:
-                            try: 
-                                plus.click()
-                                if check_for_element(driver, 'p[data-testid="ticketLimitMsg"]') or check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]'): break
-                            except Exception as e:
-                                print(e)
-                print('nothing')
-                # Trying to buy ticket with choosen settings
-                for _ in range(0, 10):
-                  print('in loop')
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  check_for_element(driver, 'button[data-testid="findTicketsBtn"]', click=True)
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  wait_for_element(driver, '//*[contains(text(), "I have read and agree to the above terms")]', xpath=True, timeout=2, click=True)
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  wait_for_element(driver, "//*[contains(text(), 'Proceed to Buy')]", click=True, xpath=True, timeout=2)
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  check_for_element(driver, '//span/*[contains(text(), "Accept and continue")]', xpath=True, click=True)
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  wait_for_button(driver)
-                  wait_for_element(driver, '//*[contains(text(), "I have read and agree to the above terms")]', xpath=True, timeout=2)
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  if check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Something went wrong...")]', xpath=True)\
-                  or check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Ticket Purchase Blocked")]', xpath=True):
-                    if reload_time: time.sleep(int(reload_time))
-                    # driver.delete_all_cookies()
-                    set_random_16_9_resolution(driver)
-                    if proxy == "vpn":
-                      reconnect_vpn(driver, link)
-                      break
-                    break
-                  check_for_element(driver, '#onetrust-reject-all-handler', click=True)
-                  if look_for_tickets(driver): 
-                    if 'checkout' in driver.current_url:
-                      data_to_play, fs = sf.read('noti.wav', dtype='float32')  
-                      sd.play(data_to_play, fs)
-                      status = sd.wait()
-                      cookie = driver.get_cookies()
-                      ua = driver.execute_script('return navigator.userAgent')
-                      num_of_tickets, total_cart = None, None
-                      try:
-                        num_of_tickets = check_for_element(driver, '#num_of_tickets').text.split(':')[1]
-                      except: pass
-                      try:
-                        total_cart = check_for_element(driver, '#cart >div > div> div> div').text.split('\n')[2]
-                      except: pass
-                      if not num_of_tickets:
                         try:
-                          num_of_tickets = category_amount_dict[random.choice(list(category_amount_dict.keys()))]
+                            plus.click()
+                            if check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]') or \
+                               check_for_element(driver, 'p[data-testid="ticketLimitMsg"]'):
+                                break
+                        except Exception as e:
+                            print(e)
+                else:
+                    step_button = plus if diff >= 0 else check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(1)')
+                    for _ in range(abs(diff)):
+                        slow_mouse_move_to_element(driver, step_button)
+                        try:
+                            step_button.click()
+                            if check_for_element(driver, 'p[data-testid="ticketLimitMsg"]') or \
+                               check_for_element(ticket, 'div[data-testid="quantityStepper"] > button:nth-child(3)[disabled]'):
+                                break
+                        except Exception as e:
+                            print(e)
+
+                # attempt purchase
+                for _ in range(10):
+                    check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+                    check_for_element(driver, 'button[data-testid="findTicketsBtn"]', click=True)
+                    check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+                    wait_for_element(driver, '//*[contains(text(), "I have read and agree to the above terms")]', xpath=True, timeout=2, click=True)
+                    check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+                    wait_for_element(driver, "//*[contains(text(), 'Proceed to Buy')]", click=True, xpath=True, timeout=2)
+                    check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+                    check_for_element(driver, '//span/*[contains(text(), "Accept and continue")]', xpath=True, click=True)
+                    check_for_element(driver, '#onetrust-reject-all-handler', click=True)
+                    wait_for_button(driver)
+                    if check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Something went wrong...")]', xpath=True) or \
+                       check_for_element(driver, '//div[@data-testid="reserveError"]/*[contains(text(), "Ticket Purchase Blocked")]', xpath=True):
+                        time.sleep(reload_time)
+                        set_random_16_9_resolution(driver)
+                        if proxy == "vpn": reconnect_vpn(driver, link)
+                        break
+                    if look_for_tickets(driver) and 'checkout' in driver.current_url:
+                        data_to_play, fs = sf.read('noti.wav', dtype='float32')
+                        sd.play(data_to_play, fs)
+                        sd.wait()
+                        cookie = driver.get_cookies()
+                        ua = driver.execute_script('return navigator.userAgent')
+                        num_of_tickets = total_cart = None
+                        try:
+                            num_of_tickets = check_for_element(driver, '#num_of_tickets').text.split(':')[1]
                         except: pass
-                      print(num_of_tickets, total_cart)
-                      
-                      full_data = {"type": 1, 'url': driver.current_url, 'name': None, 'date': None, 'city': None,
-                        'proxy': proxy, 'cookie': cookie, 'user-agent': ua, 'num_of_tickets': num_of_tickets, 'total_cart': total_cart, 'adspower': data['adspower_number']}
-                      try: post_request(full_data)
-                      except: print("Can't send message. Slack-bot is off")
-                      input('Continue?')
-                      break
-            limit = False
-    except Exception as e:
-        print("EXCEPTION", e)
-        if reload_time: time.sleep(reload_time)
-        else: time.sleep(45)
+                        try:
+                            total_cart = check_for_element(driver, '#cart >div > div> div> div').text.split('\n')[2]
+                        except: pass
+                        full_data = {"type": 1, 'url': driver.current_url, 'proxy': proxy, 'cookie': cookie,
+                                     'user-agent': ua, 'num_of_tickets': num_of_tickets,
+                                     'total_cart': total_cart, 'adspower': data['adspower_number']}
+                        post_request(full_data)
+                        input('Continue?')
+                        break
+                limit = False
+        except Exception as e:
+            print("EXCEPTION", e)
+            time.sleep(reload_time or 45)
         
 
 
