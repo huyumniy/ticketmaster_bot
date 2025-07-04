@@ -102,9 +102,6 @@ pyee==11.0.1
 PyGetWindow==0.0.9
 PyJWT==2.3.0
 PyMsgBox==1.0.9
-pyobjc-core==9.2
-pyobjc-framework-Cocoa==9.2
-pyobjc-framework-Quartz==9.2
 pyOpenSSL==23.2.0
 pyparsing==3.1.2
 pyperclip==1.8.2
