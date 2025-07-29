@@ -2,6 +2,8 @@ from flask import Flask, request
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import re
+import os, sys
+import json
 
 app = Flask(__name__)
 
@@ -63,7 +65,7 @@ def send_to_group_channel(data, cookies, ua):
 
 def send_message_to_group_channel(data):
     client.chat_postMessage(
-        channel="ticketmaster-bot",
+        channel="#ticketmaster-bot",
         text=f"{data}",
         parse="mrkdwn"
     )
