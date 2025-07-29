@@ -55,7 +55,7 @@ def send_to_group_channel(data, cookies, ua):
     user_url = user_file.get("file").get("permalink")
     
     client.chat_postMessage(
-        channel="#ticketmaster_notifications_temp",
+        channel="#ticketmaster-bot",
         text=f"{data}\n*User-Agent:* {user_url}\n*Cookie:* {cookie_url}",
         parse="mrkdwn"
     )
@@ -63,7 +63,7 @@ def send_to_group_channel(data, cookies, ua):
 
 def send_message_to_group_channel(data):
     client.chat_postMessage(
-        channel="ticketmaster_notifications_temp",
+        channel="ticketmaster-bot",
         text=f"{data}",
         parse="mrkdwn"
     )
